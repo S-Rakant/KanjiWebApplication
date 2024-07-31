@@ -3,7 +3,7 @@
 /flask_app/save_db/
 /flask_app/__pycache__/
 /flask_app/register_kanji_web_scraping.py
-/flask_app/register_kanji_web_scraping.py
+/flask_app/register_kanji.py
 /db_operation.py
 /generate_key.py
 /goolab_hiragana_appID.txt

@@ -1,0 +1,24 @@
+/* support.css */
+
+.main_container {
+    margin-top: 120px; /* ヘッダーの高さに合わせてマージンを設定 */
+    padding: 20px; /* コンテンツのパディング */
+    background-color: #fff; /* 背景色 */
+    border-radius: 8px; /* 角丸 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* ボックスシャドウ */
+}
+
+.support {
+    text-align: center; /* テキストを中央揃え */
+    margin-top: 20px; /* 上部のマージン */
+}
+
+.support a {
+    text-decoration: none; /* リンクの下線を削除 */
+    color: #007bff; /* リンクの色 */
+    margin: 0 10px; /* リンク間の余白 */
+}
+
+.support a:hover {
+    text-decoration: underline; /* マウスオーバー時の下線追加 */
+}

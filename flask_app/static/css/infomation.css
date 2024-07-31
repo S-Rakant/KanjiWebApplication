@@ -1,0 +1,20 @@
+.main_container {
+    margin-top: 120px; /* ヘッダーの高さに合わせてマージンを設定 */
+}
+
+.info {
+    padding: 20px; /* コンテンツのパディング */
+    background-color: #fff; /* 背景色 */
+    border-radius: 8px; /* 角丸 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* ボックスシャドウ */
+}
+
+
+.info h2 {
+    margin-bottom: 10px;
+}
+
+.info p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}

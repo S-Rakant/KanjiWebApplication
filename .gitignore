@@ -1,0 +1,9 @@
+/.env
+/flask_app/data/
+/flask_app/save_db/
+/flask_app/__pycache__/
+/flask_app/register_kanji_web_scraping
+/flask_app/register_kanji_web_scraping
+/db_operation
+/generate_key
+/goolab_hiragana_appID

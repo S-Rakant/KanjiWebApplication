@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kanji Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../static/js/game.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            {% include 'navigation.html' %}
+        </nav>
+    </header>
+    <main id="top_container">
+        <div class="start">
+            <button id="start-button">GAME START</button>
+        </div>
+        <div class="game-modes">
+            <label class="game-mode">
+                <input type="radio" name="game-mode-select" value="quiz">Kanji Quiz
+            </label>
+            <label class="game-mode">
+                <input type="radio" name="game-mode-select" value="review">Review
+            </label>
+        </div>
+        <div class="score_info">
+            <p class="score_table_title">👑RANKING👑</p>
+            {% if ranking_info == [] %}
+            <p class="none_score_info">まだ情報がありません</p>
+            {% else %}
+            <table class="score_table" border="1">
+                <tr>
+                    <th>Rank</th>
+                    <th>User Name</th>
+                    <th>Score</th>
+                    <th>Play Time</th>
+                </tr>
+                {% for info in ranking_info %}
+                <tr>
+                    <td>{{  info.rank }}</td>
+                    <td>{{ info.username }}</td>
+                    <td>{{ info.score }}</td>
+                    <td>{{ info.playtime}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div>
+    </main>
+    <main id="game_answer_container" class="hidden">
+        <div class="game_title">
+            <p id="mode_title">
+                <h1>Game Mode:<span id="study_mode">Kanji Quiz</span></h1>
+            </p>
+        </div>
+        <div class="question">
+            <p>Question <span id="question_number">0</span></p>
+        </div>
+        <div class="kanji">
+            <span id="syutudai_kanji">初期</span>
+        </div>
+        <div class="common">
+            <div id="answer_block">
+                <div id="answer_flex_block">
+                    <form id="answer_form">
+                        <label for="answer">Answer</label>
+                        <input type="text" id="input_answer">
+                        <label for="answer"><input type="submit" value="Submit" id="send_answer"></label>
+                    </form>
+                </div>
+            </div>
+            <div id="explanation_block" class="hidden">
+                <div class="explanation_flex">
+                    <div id="explanation">
+                        <p><span id="correct_or_incorrect">初期値</span></p>
+                        <p>Kun reading (romanized):<span id="kunyomi_roma">初期値</span></p>
+                        <p>Kun reading (japanese):<span id="kunyomi_ja">初期値</span></p>
+                        <p>On reading (romanized):<span id="onyomi_roma">初期値</span></p>
+                        <p>On reading (japanese):<span id="onyomi_ja">初期値</span></p>
+                    </div>
+                    <div id="next_prob">
+                        <button id="next_prob_button">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <main id="result_container" class="hidden">
+        <div id="rate_block">
+            <p>Score : <span id="correct_answer_rate">初期</span></p>
+        </div>
+        <div class="return_home">
+            <a href="">Return Home</a>
+        </div>
+    </main>
+</body>
+</html>

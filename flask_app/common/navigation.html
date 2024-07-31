@@ -1,0 +1,16 @@
+<div class="home_and_login">
+    <div class="home">
+        <a href=""><img src="../static/img/Home_icon.png" height="50px" width="50px" alt="HOME"></a>
+    </div>
+    <div class="user_name">
+        <p>Welcome!!<span class="current_userName">{{ current_user.username }}</span></p>
+    </div>
+    <ul class="navbar">
+        <li><a href="{{ url_for('main.infomation') }}">Infomation</a></li>
+        <li><a href="{{ url_for('main.support') }}">Support</a></li>
+        <li><a href="">navigation3</a></li>
+    </ul>
+</div>
+<div class="logout">
+    <a href="{{ url_for('auth.logout') }}">Logout</a>
+</div>

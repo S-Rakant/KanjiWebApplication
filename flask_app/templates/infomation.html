@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infomation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/infomation.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            {% include 'navigation.html' %}
+        </nav>
+    </header>
+    <main class="main_container">
+        <div class="info">
+            <h2>Purpose of this WebSite</h2>
+            <p id="purpose">
+                This website is primarily intended for people whose native language is not Japanese to use when learning kanji.<br>
+                Please make use of this site and deepen your knowledge of kanji while having fun.
+            </p>
+            <h2>Rules</h2>
+            <p id="rule">
+                When you select "Kanji Quiz" and start the game, you will be given 10 kanji questions per round. <br>
+                In this quiz, please enter the reading of the kanji and submit it. <br>
+                You can answer in Japanese or in the Roman alphabet. After answering all 10 questions,<br>
+                your score will be displayed at the end.<br>
+                "Review" is still being implemented, so stay tuned! The ranking board below records each user's highest score.<br>
+                5 players from 1st to 5th place are displayed.<br>
+            </p>
+            <h2>Points to Note</h2>
+            <p id="attention">
+                When answering questions about the reading of kanji in romaji, there are a few things to keep in mind.<br>
+                Even if you think you have entered the correct kanji reading, if the romanization is incorrect it will be incorrect.<br>
+                This is because the readings of the kanji are entered in the Kunrei system. The correct reading should be entered in the Hepburn system.<br>
+                If you would like to learn about the Romanization format, visit the following page.
+                <a href="https://park.itc.u-tokyo.ac.jp/eigo/UT-Komaba-Nihongo-no-romaji-hyoki-v1.pdf" target="_blank">Recommended form of romanization of Japanese (University of Tokyo)</a><br>
+                Below are some examples of Hepburn style:<br>
+                <ul>
+                    <li>The correct answer is "shi" but you enter "si"</li>
+                    <li>The correct answer is "tsu" but you enter "tu"</li>
+                    <li>The correct answer is "fu" but you enter "hu"</li>
+                    <li>The correct answer is "zyu" but you enter "ju"</li>
+                    <li>The correct answer is "ji" but you enter "zi"</li>
+                    <li>The correct answer is "sho" but you enter "syo"</li>
+                </ul>
+            </p>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/support.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            {% include 'navigation.html' %}
+        </nav>
+    </header>
+    <main class="main_container">
+    <h2>Support</h2>
+    <p class="support">
+        <p><a target="_blank" href="https://icons8.com/icon/9zcV0gKAozhn/home">ホームボタン</a> アイコン by <a target="_blank" href="https://icons8.com">Icons8</a></p>
+        <p><a target="_blank" href="https://kanjialive.com">Kanji alive</a></p>
+        <p><a target="_blank" href="https://labs.goo.ne.jp/api/jp/hiragana-translation">ひらがな化API</a></p>
+    </p>
+    <h2>Contact</h2>
+    <p class="contact">
+        Plese contact me at
+        <a href="mailto:sousuke20020416@gmail.com">sousuke20020416@gmail.com</a>
+    </p>
+    </main>
+</body>
+</html>

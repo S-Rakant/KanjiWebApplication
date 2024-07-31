@@ -1,0 +1,90 @@
+/* Reset and General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.home_and_login {
+    display: flex;
+    align-items: center;
+}
+
+.home_and_login .home_and_login {
+    position: relative;
+    z-index: 10;
+}
+
+.home_and_login div {
+    margin: 0 4rem;
+}
+
+.user_name {
+    font-size: 18px;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.user_name p {
+    margin: 0;
+}
+
+.user_name .current_userName {
+    margin-left: 1rem;
+    margin-right: 15rem;
+}
+
+.logout {
+    margin-left: auto;
+}
+
+.logout a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.logout a:hover {
+    text-decoration: underline;
+}
+
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar li {
+    margin-right: 20px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}

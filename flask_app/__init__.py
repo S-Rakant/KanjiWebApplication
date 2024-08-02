@@ -11,7 +11,7 @@ from datetime import timedelta
 db = SQLAlchemy()
 login_manager = LoginManager()
 app = Flask(__name__)
-app.permanent_session_lifetime = timedelta(minutes = 30)
+app.permanent_session_lifetime = timedelta(minutes = 150)
 # csrf = CSRFProtect(app) #csrf_tokenがsession毎に自動で生成される
 
 load_dotenv()

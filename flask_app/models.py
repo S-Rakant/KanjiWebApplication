@@ -56,21 +56,11 @@ class Kanji_ID_Session(db.Model):
     kanji_data8 = db.Column(db.Integer, nullable = False)
     kanji_data9 = db.Column(db.Integer, nullable = False)
 
-# class Kanji_Table(db.Model):
-#     __tablename__ = 'kanjiID_table'
-#     kanji_table_id = db.Column(db.Integer, primary_key = True, nullable = False)
-#     user_id = db.Column(db.Integer, primary_key = True, nullable = False)
-#     # all_kanji tableのkanji_idをユーザごとに保存
-#     kanji_data0 = db.Column(db.Integer, nullable = False)
-#     kanji_data1 = db.Column(db.Integer, nullable = False)
-#     kanji_data2 = db.Column(db.Integer, nullable = False)
-#     kanji_data3 = db.Column(db.Integer, nullable = False)
-#     kanji_data4 = db.Column(db.Integer, nullable = False)
-#     kanji_data5 = db.Column(db.Integer, nullable = False)
-#     kanji_data6 = db.Column(db.Integer, nullable = False)
-#     kanji_data7 = db.Column(db.Integer, nullable = False)
-#     kanji_data8 = db.Column(db.Integer, nullable = False)
-#     kanji_data9 = db.Column(db.Integer, nullable = False)
+class Review(db.Model):
+    __tablename__ = 'review_table'
+    user_id = db.Column(db.Integer, primary_key = True, nullable = False)
+    review_kanjiID_json = db.Column(db.String) #間違えた漢字IDをText型で保存.処理するときはJSON型として処理可能.
+
 
 
 

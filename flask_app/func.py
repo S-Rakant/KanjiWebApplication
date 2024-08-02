@@ -26,11 +26,11 @@ def fetch_data_from_kanjiID_session():
 
     kanjiID = session.query(models.Kanji_ID_Session).get(current_user.id)
     kanjiID_arr = set_kanji_id(kanjiID)
-    res = []
+    kanji_answer = []
     for id in kanjiID_arr:
         #kanjiID_sessionのkanjiIDと一致する漢字をall_kanjiから取得
         kanji_data = session.query(models.Kanji).get(id)
-        res.append(
+        kanji_answer.append(
             {
             'kanji':kanji_data.kanji,
             'kunyomi_roma':kanji_data.kunyomi_roma,
@@ -39,7 +39,7 @@ def fetch_data_from_kanjiID_session():
             'onyomi_ja':kanji_data.onyomi_ja,
             }
         )
-    print(res)
+    res = {'kanji_answer':kanji_answer, 'kanji_id':kanjiID_arr}
     return jsonify(res)
 
 def set_kanji_id(kanji_id_query):

@@ -82,6 +82,12 @@ def support():
         'support.html'
     )
 
+@main.route('/ReviewList')
+def review():
+    return render_template(
+        'review.html'
+    )
+
 def random_kanjiID_select(a, b, k):
     result_arr = []
     while(len(result_arr) < k):

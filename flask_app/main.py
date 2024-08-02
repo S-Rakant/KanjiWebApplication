@@ -12,6 +12,10 @@ import sqlalchemy
 import random
 from dotenv import load_dotenv
 import os
+import ast
+
+
+from .models import Review, Kanji
 
 load_dotenv()
 url = os.getenv('SQLITE_DB_URL')
@@ -84,8 +88,28 @@ def support():
 
 @main.route('/ReviewList')
 def review():
+    engine = sqlalchemy.create_engine(url, echo=False)
+    Session = sqlalchemy.orm.sessionmaker(bind=engine)
+    session = Session()
+    match_id_review = session.query(Review).get(current_user.id)
+    miss_kanji_data = []
+    if(match_id_review != None):
+        miss_kanji_fromDB_list = ast.literal_eval(match_id_review.review_kanjiID_json)
+        #間違えた漢字IDの「漢字の詳細」を辞書形式でmiss_kanji_dataに格納
+        #render_templateの引数に指定
+        for kanji_id in miss_kanji_fromDB_list:
+            match_id_kanji = session.query(Kanji).get(kanji_id)
+            miss_kanji_data.append({
+                'kanji_id': match_id_kanji.kanji_id,
+                'kanji': match_id_kanji.kanji,
+                'kunoymi_roma': match_id_kanji.kunyomi_roma,
+                'kunyomi_ja': match_id_kanji.kunyomi_ja,
+                'onyomi_roma': match_id_kanji.onyomi_roma,
+                'onyomi_ja': match_id_kanji.onyomi_ja,
+                })
     return render_template(
-        'review.html'
+        'review.html',
+        miss_kanji_data=miss_kanji_data,
     )
 
 def random_kanjiID_select(a, b, k):

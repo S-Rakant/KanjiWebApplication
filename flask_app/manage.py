@@ -49,13 +49,15 @@ def regist_mistake_kanjiID():
     match_id = session.query(Review).get(current_user.id)
     review_kanjiID = []
     if(match_id == None):
-        review_kanjiID = miss_kanjiID
+        review_kanjiID = miss_kanjiID #list
     else:
         miss_kanji_fromDB_text = match_id.review_kanjiID_json
         #DBに保存されている文字列をlistに変換
-        miss_kanji_fromDB_list = ast.literal_eval(miss_kanji_fromDB_text)
+        miss_kanji_fromDB_list = ast.literal_eval(miss_kanji_fromDB_text) #list
         #textをset型に変換しmisskanjiID_tableと結合--->currentDB_mistake_kanjiIDに代入
-        review_kanjiID = set(miss_kanjiID+miss_kanji_fromDB_list)
+        temp = list(miss_kanjiID)+list(miss_kanji_fromDB_list) #list
+        review_kanjiID_set = set(temp) #set
+        review_kanjiID = list(review_kanjiID_set)
         session.delete(match_id)
     miss_kanjiID_table = Review(user_id=current_user.id, review_kanjiID_json=str(review_kanjiID))
     session.add(miss_kanjiID_table)

@@ -6,6 +6,7 @@
     <title>Review List</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/review.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
+    <script src="{{ url_for('static', filename='js/review.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -18,6 +19,9 @@
         <div class="table-container">
             <div class="table-title">
                 <table border="1">
+                    {% if miss_kanji_data == [] %}
+                    <div class="none-review-info">You haven't made any mistakes yet</div>
+                    {% else %}
                     <thead>
                         <tr>
                             <th>kanji</th>
@@ -25,160 +29,16 @@
                             <th>check box</th>
                         </tr>
                     </thead>
-                    <!-- <div class="none-review-info">You haven't made any mistakes yet</div> -->
                     <tbody>
+                        {% for item in miss_kanji_data %}
                         <tr>
-                            <td>一</td>
+                            <td>{{ item.kanji }}</td>
                             <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
+                            <td><input type="checkbox" value=item.kanji_id></td>
                         </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>一</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value="1"></td>
-                        </tr>
-                        <!-- 他の行をここに追加 -->
+                        {% endfor %}
                     </tbody>
+                    {% endif %}
                 </table>
             </div>
         </div>

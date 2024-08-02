@@ -1,6 +1,6 @@
+from flask_app import create_app
 from . import models
 from . import register_kanji as reg
-from flask_app import create_app
 
 
 from flask import render_template, request, abort

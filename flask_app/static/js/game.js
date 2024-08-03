@@ -20,6 +20,8 @@ const result_container = document.getElementById('result_container');
 
 const return_to_home_button = document.getElementById('return_to_home');
 
+const mistake = document.getElementById('mistake');
+
 
 
 
@@ -28,16 +30,19 @@ let correct_counter = 0;
 let correct_rate = 0;
 let all_kanji_id; //10個の漢字IDを保存しておく
 let miss_kanji_id_arr; //ユーザが間違えた漢字IDを保存しておく
-const AMOUNT_PROBLEM = 3;
+let missed_before_kanji_id = [];
+const AMOUNT_PROBLEM = 10;
 
 
-const game = () => {
+
+const game = async() => {
     console.log('gameに入りました')
     prob_counter = 0;
     correct_counter = 0;
     correct_rate = 0;
     all_kanji_id = [];
     miss_kanji_id_arr = [];
+    missed_before_kanji_id = [];
     const game_mode = document.querySelector('input[name="game-mode-select"]:checked'); //mode_select中のチェックが付いたものを抽出
 
     if(game_mode == null){
@@ -49,12 +54,29 @@ const game = () => {
     else{
         game_mode_name(game_mode);
         updateMainAnswerContent(); //updateMainAnswerContentはload_kanji()内で呼び出し
+        await set_missed_before_kanji_id(); //過去に間違えたことのある漢字IDを取得しmissed_before_kanji_idに格納
         game_container.classList.remove('hidden');
         top_container.classList.add('hidden');
-        result_container.classList.add('hidden');
-        
+        result_container.classList.add('hidden');        
     }
 };
+
+const set_missed_before_kanji_id = () =>{
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: "GET",
+            url: "func/get_kanjiID_missed_before",
+            success: function (response) {
+                resolve(response);
+                console.log(response);
+                missed_before_kanji_id = response;
+            },
+            error: function (error) {
+                reject(error);
+            }
+        });
+    });
+}
 
 /**---------------------------------------ここから----------------------------------------
  * 問題番号の漢字データをロードするload_kanji_dataを作成
@@ -117,6 +139,14 @@ const updateMainAnswerContent = async() => {
     const question_num = document.getElementById('question_number');
     question_num.textContent = prob_counter+1; //〇問目を更新
     syutudai_kanji.textContent = kanji; //出題漢字を更新
+    console.log('kanji_id = ' + all_kanji_id[prob_counter])
+    if(missed_before_kanji_id.includes(all_kanji_id[prob_counter])){
+        mistake.classList.remove('hidden');
+    }
+    else{
+        mistake.classList.add('hidden');
+        console.log('過去に間違えた漢字ではありません.')
+    }
     
     answer_block.classList.remove('hidden'); //漢字の説明を隠し、送信ボタンを表示
     explanation.classList.add('hidden');

@@ -98,6 +98,10 @@ tbody tr:hover {
     margin-bottom: 20px;
 }
 
+#return_button_container button:hover {
+    background-color: #3d9740;
+}
+
 #return_review_list {
     background-color: #4CAF50; /* 緑色 */
     color: white; /* ボタンの文字色を白に */
@@ -122,7 +126,7 @@ tbody tr:hover {
 
 #kanji_flame {
     position: relative;
-    background-color: #dfe3e1;
+    background-color: #dfdfe3;
     width: 300px;
     height: 300px;
     margin: 5px auto;
@@ -142,4 +146,25 @@ tbody tr:hover {
     margin: 10px auto;
     border: solid #ddd;
     font-size: 20px;
+}
+
+#delete_kanji_button {
+    display: flex;
+    justify-content: right;
+    margin-top: 20px;
+}
+
+#delete_kanji_button button:hover{
+    background-color: #cf3a3a; /* 濃い赤色*/
+}
+
+#delete_kanji_from_review_table {
+    background-color: #e14343; /* 赤色 */
+    color: white; /* ボタンの文字色を白に */
+    padding: 10px 20px; /* ボタンの内側の余白を設定 */
+    border: none; /* ボタンの境界線を消す */
+    border-radius: 5px; /* ボタンの角を丸くする */
+    cursor: pointer; /* カーソルをポインタに */
+    font-size: 20px; /* フォントサイズを設定 */
+    font-weight: bold;
 }

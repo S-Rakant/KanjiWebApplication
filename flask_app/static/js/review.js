@@ -10,10 +10,15 @@ document.addEventListener('DOMContentLoaded', function(){
     const onyomi_roma = document.getElementById('onyomi_roma');
     const onyomi_ja = document.getElementById('onyomi_ja');
 
+    const delete_kanji_from_review_table_button = document.getElementById('delete_kanji_from_review_table');
+
+
+    let current_pointed_kanjiID;
 
     const display_kanji_details = async(value) =>{
         console.log(value)
         data = await get_kanji_details_from_id(value);
+        current_pointed_kanjiID = value;
         console.log(data);
         modify_none_data = modify_none(data);
         kanji.textContent = modify_none_data.kanji;
@@ -56,6 +61,26 @@ document.addEventListener('DOMContentLoaded', function(){
         }
         return res;
     }
+
+    const delete_kanji_from_review_table = () =>{
+        return new Promise((resolve, reject) => {
+            let data = { 'id': current_pointed_kanjiID };
+            $.ajax({
+                type: "POST",
+                url: "func/delete_kanji_from_review_table",
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    resolve(response);
+                    location.reload();
+                },
+                error: function (error) {
+                    reject(error);
+                }
+            });
+        });
+    }
     
     const add_hidden = (element) =>{
         element.classList.add('hidden');
@@ -74,5 +99,9 @@ document.addEventListener('DOMContentLoaded', function(){
     return_review_list.addEventListener('click', function(){
         add_hidden(details_preview_contents);
         remove_hidden(table_contents);
+    })
+
+    delete_kanji_from_review_table_button.addEventListener('click', function(){
+        delete_kanji_from_review_table();
     })
 })

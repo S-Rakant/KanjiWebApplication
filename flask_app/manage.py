@@ -19,6 +19,8 @@ manage = Blueprint('manage', __name__, url_prefix='/manage')
 @manage.route('/regist_ranking', methods=['GET', 'POST'])
 def regist_ranking():
     print('reach!!')
+    if(not current_user.is_authenticated):
+        return jsonify({'message': 'Session was expired!'}), 400
     engine = sqlalchemy.create_engine(url, echo=False)
     Session = sqlalchemy.orm.sessionmaker(bind=engine)
     session = Session()

@@ -87,6 +87,7 @@ def support():
     )
 
 @main.route('/ReviewList')
+@login_required
 def review():
     engine = sqlalchemy.create_engine(url, echo=False)
     Session = sqlalchemy.orm.sessionmaker(bind=engine)

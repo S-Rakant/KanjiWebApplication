@@ -1,7 +1,5 @@
-.top_container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+#top_container {
     margin-top: 100px; /* ヘッダーの高さに合わせてマージンを設定 */
     padding: 20px; /* コンテンツのパディング */
     background-color: #fff; /* 背景色 */
@@ -10,7 +8,7 @@
     text-align: center;
 }
 
-.table-container {
+#table-container {
     width: 100%;
     max-width: 600px;  /* 必要に応じて調整 */
     border: 1px solid #ccc;
@@ -18,12 +16,21 @@
     overflow-x: auto;  /* 横方向のスクロールを有効に */
     overflow-y: auto;  /* 縦方向のスクロールを有効に */
     max-height: 80vh;  /* 必要に応じて調整 */
-    margin-bottom: 20px; /* ボタンとの間にスペースを追加 */
+    margin: 20px auto;
 }
 
-.table-title {
-    width: 100%;
-    overflow-x: auto;
+#details_preview {
+    margin-top: 100px; /* ヘッダーの高さに合わせてマージンを設定 */
+    padding: 20px; /* コンテンツのパディング */
+    background-color: #fff; /* 背景色 */
+    border-radius: 8px; /* 角丸 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* ボックスシャドウ */
+    /* text-align: center; */
+    height: 80vh;
+}
+
+.hidden {
+    display: none;
 }
 
 table {
@@ -48,6 +55,13 @@ tbody td {
     font-size: 30px;
 }
 
+tbody button {
+    width: 60px;
+    height: 30px;
+    transform: scale(1.5); /* チェックボックスのサイズを調整 */
+    cursor: pointer;
+}
+
 input[type="checkbox"] {
     width: 30px;
     height: 30px;
@@ -61,7 +75,7 @@ tbody tr:hover {
 }
 
 /* ボタンのスタイル */
-.send-info button {
+#send-info button {
     background-color: #4CAF50; /* 緑色 */
     color: white; /* ボタンの文字色を白に */
     padding: 10px 20px; /* ボタンの内側の余白を設定 */
@@ -71,10 +85,61 @@ tbody tr:hover {
     font-size: 16px; /* フォントサイズを設定 */
 }
 
-.send-info button:hover {
+#send-info button:hover {
     background-color: #45a049; /* ホバー時の色を少し濃く */
 }
 
-.none-review-info {
+#none-review-info {
     font-size: 30px;
+}
+
+#return_button_container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#return_review_list {
+    background-color: #4CAF50; /* 緑色 */
+    color: white; /* ボタンの文字色を白に */
+    padding: 10px 20px; /* ボタンの内側の余白を設定 */
+    border: none; /* ボタンの境界線を消す */
+    border-radius: 5px; /* ボタンの角を丸くする */
+    cursor: pointer; /* カーソルをポインタに */
+    font-size: 20px; /* フォントサイズを設定 */
+    font-weight: bold;
+}
+
+#kanji_explanation_container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#kanji_content {
+    text-align: center;
+    margin: 10px auto;
+    border: solid #ddd;
+}
+
+#kanji_flame {
+    position: relative;
+    background-color: #dfe3e1;
+    width: 300px;
+    height: 300px;
+    margin: 5px auto;
+}
+
+#kanji {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-top: 50px;
+    font-size: 250px;
+}
+
+#kanji_yomi_contents {
+    text-align: center;
+    margin: 10px auto;
+    border: solid #ddd;
+    font-size: 20px;
 }

@@ -28,7 +28,7 @@ let correct_counter = 0;
 let correct_rate = 0;
 let all_kanji_id; //10個の漢字IDを保存しておく
 let miss_kanji_id_arr; //ユーザが間違えた漢字IDを保存しておく
-const AMOUNT_PROBLEM = 10;
+const AMOUNT_PROBLEM = 3;
 
 
 const game = () => {
@@ -238,6 +238,7 @@ const show_result = async() => {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             error: function (xhr, status, error) {
+                window.alert('Your session was expired! Please reload and login again');
                 console.log('regist_ranking_Error', error);
                 console.log('XHR:', xhr);
                 console.log('Status:', status)
@@ -262,6 +263,7 @@ const update_review_table = () => {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             error: function (xhr, status, error) {
+                window.alert('Your session was expired! Please reload and login again');
                 console.log('regist_mistake_kanjiID_Error', error);
                 console.log('XHR:', xhr);
                 console.log('Status:', status)

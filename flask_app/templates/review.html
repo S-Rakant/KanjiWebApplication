@@ -15,12 +15,12 @@
             {% include 'navigation.html' %}
         </nav>
     </header>
-    <main class="top_container">
-        <div class="table-container">
-            <div class="table-title">
+    <main id="top_container">
+        <div id="table-container">
+            <div id="table-title">
                 <table border="1">
                     {% if miss_kanji_data == [] %}
-                    <div class="none-review-info">You haven't made any mistakes yet</div>
+                    <div id="none-review-info">You haven't made any mistakes yet</div>
                     {% else %}
                     <thead>
                         <tr>
@@ -33,8 +33,8 @@
                         {% for item in miss_kanji_data %}
                         <tr>
                             <td>{{ item.kanji }}</td>
-                            <td><a href="">details</a></td>
-                            <td><input type="checkbox" value=item.kanji_id></td>
+                            <td><button class="details_button" value="{{ item.kanji_id }}">details</a></td>
+                            <td><input type="checkbox" value="{{ item.kanji_id }}"></td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -42,8 +42,26 @@
                 </table>
             </div>
         </div>
-        <div class="send-info">
+        <div id="send-info">
             <button>Exclude</button>
+        </div>
+    </main>
+    <main id="details_preview" class="hidden">
+        <div id="return_button_container">
+            <button id="return_review_list">return to review list</button>
+        </div>
+        <div id="kanji_explanation_container">
+            <div id="kanji_content">
+                <div id="kanji_flame">
+                    <p><span id="kanji">例</span></p>
+                </div>
+            </div>
+            <div id="kanji_yomi_contents">
+                <p>Kun reading (romanized):<span id="kunyomi_roma">初期値</span></p>
+                <p>Kun reading (japanese):<span id="kunyomi_ja">初期値</span></p>
+                <p>On reading (romanized):<span id="onyomi_roma">初期値</span></p>
+                <p>On reading (japanese):<span id="onyomi_ja">初期値</span></p>
+            </div>
         </div>
     </main>
 </body>

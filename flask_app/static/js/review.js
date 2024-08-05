@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const onyomi_ja = document.getElementById('onyomi_ja');
 
     const delete_kanji_from_review_table_button = document.getElementById('delete_kanji_from_review_table');
-
+    const exclude_button = document.getElementById('exclude_button');
 
     let current_pointed_kanjiID;
 
@@ -81,6 +81,31 @@ document.addEventListener('DOMContentLoaded', function(){
             });
         });
     }
+
+    const exclude_selected_kanji = () => {
+        const selected_kanji = document.querySelectorAll('input[name=user_check_in_review]:checked');
+        send = [];
+        for(let i=0; i<selected_kanji.length; i++){
+            send.push(selected_kanji[i].value);
+        }
+        console.log(send);
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                type: "POST",
+                url: "func/delete_checked_kanji_from_review_table",
+                data: JSON.stringify(send),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    resolve(response);
+                    location.reload();
+                },
+                error: function (error) {
+                    reject(error);
+                }
+            });
+        })
+    }
     
     const add_hidden = (element) =>{
         element.classList.add('hidden');
@@ -103,5 +128,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
     delete_kanji_from_review_table_button.addEventListener('click', function(){
         delete_kanji_from_review_table();
+    })
+
+    exclude_button.addEventListener('click', function(){
+        exclude_selected_kanji();
     })
 })

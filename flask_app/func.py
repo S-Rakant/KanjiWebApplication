@@ -90,6 +90,33 @@ def delete_kanji_from_review_table():
     session.close()
     return jsonify({'message': 'success'}), 200
 
+@func.route('/delete_checked_kanji_from_review_table', methods=['POST'])
+@login_required
+def delete_checked_kanji_from_review_table():
+    engine = sqlalchemy.create_engine(url, echo=False)
+    Session = sqlalchemy.orm.sessionmaker(bind=engine)
+    session = Session()
+    match_uer_id = session.query(Review).get(current_user.id)
+    checked_kanjiID_list = request.get_json()
+    if(checked_kanjiID_list == []):
+        return jsonify({'message': 'no checked kanji'}), 200
+    else:
+        user_review_kanji_list = match_uer_id.review_kanjiID_json
+        string_to_user_review_kanji_list = ast.literal_eval(user_review_kanji_list)
+        print(f'string_to_user_review_list = {string_to_user_review_kanji_list}')
+        to_int_checked_kanji_list = []
+        for item in checked_kanjiID_list:
+            to_int_checked_kanji_list.append(int(item))
+        print(f'checked_kanjiID_list = {to_int_checked_kanji_list}')
+        removed_list = [item for item in string_to_user_review_kanji_list if item not in to_int_checked_kanji_list]
+        print(removed_list)
+        session.delete(match_uer_id)
+        update_missed_kanjiID = Review(user_id=current_user.id, review_kanjiID_json=str(removed_list))
+        session.add(update_missed_kanjiID)
+        session.commit()
+        session.close()
+        return jsonify({'message': 'update review table'}), 200
+
 @func.route('/get_kanjiID_missed_before', methods=['GET'])
 @login_required
 def get_kanjiID_missed_before():
@@ -97,12 +124,11 @@ def get_kanjiID_missed_before():
     Session = sqlalchemy.orm.sessionmaker(bind=engine)
     session = Session()
     match_user_id = session.query(Review).get(current_user.id)
-    review_kanji_id_string = match_user_id.review_kanjiID_json
-    string_to_list = ast.literal_eval(review_kanji_id_string)
-    # res = {
-    #     'missed_kanjiID' : string_to_list
-    # }
-    print(f'res = {type(string_to_list)}')
+    if(match_user_id == None):
+        string_to_list = []
+    else:
+        review_kanji_id_string = match_user_id.review_kanjiID_json
+        string_to_list = ast.literal_eval(review_kanji_id_string)
     return jsonify(string_to_list)
 
 

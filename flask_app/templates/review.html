@@ -34,7 +34,7 @@
                         <tr>
                             <td>{{ item.kanji }}</td>
                             <td><button class="details_button" value="{{ item.kanji_id }}">details</a></td>
-                            <td><input type="checkbox" value="{{ item.kanji_id }}"></td>
+                            <td><input type="checkbox" name="user_check_in_review" value="{{ item.kanji_id }}"></td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -43,7 +43,7 @@
             </div>
         </div>
         <div id="send-info">
-            <button>Exclude</button>
+            <button id="exclude_button">Exclude</button>
         </div>
     </main>
     <main id="details_preview" class="hidden">

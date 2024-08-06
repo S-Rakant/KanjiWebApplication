@@ -8,8 +8,9 @@ from sqlalchemy import MetaData, Table
 import sqlalchemy
 from dotenv import load_dotenv
 import os
-from .models import Kanji, Review
+from .models import Kanji, Review, Kanji_ID_Session, Review_KanjiID_Session
 import ast
+import random
 
 load_dotenv()
 url = os.getenv('SQLITE_DB_URL')
@@ -26,12 +27,12 @@ def fetch_data_from_kanjiID_session():
     Session = sqlalchemy.orm.sessionmaker(bind=engine)
     session = Session()
 
-    kanjiID = session.query(models.Kanji_ID_Session).get(current_user.id)
+    kanjiID = session.query(Kanji_ID_Session).get(current_user.id)
     kanjiID_arr = set_kanji_id(kanjiID)
     kanji_answer = []
     for id in kanjiID_arr:
         #kanjiID_sessionのkanjiIDと一致する漢字をall_kanjiから取得
-        kanji_data = session.query(models.Kanji).get(id)
+        kanji_data = session.query(Kanji).get(id)
         kanji_answer.append(
             {
             'kanji':kanji_data.kanji,
@@ -42,7 +43,51 @@ def fetch_data_from_kanjiID_session():
             }
         )
     res = {'kanji_answer':kanji_answer, 'kanji_id':kanjiID_arr}
-    return jsonify(res)
+    return jsonify(res), 200
+
+@func.route('/fetch_data_from_review_sessiom_table', methods=['GET'])
+def fetch_data_from_review_session_table():
+    #sessionが切れていたらloginを促す
+    if(not current_user.is_authenticated):
+        return jsonify({'message': 'Session was expired!'}), 400
+    engine = sqlalchemy.create_engine(url, echo=False)
+    Session = sqlalchemy.orm.sessionmaker(bind=engine)
+    session = Session()
+    match_id = session.query(Review_KanjiID_Session).get(current_user.id)
+    review_kanji_id_list = [
+        match_id.kanji_data0,
+        match_id.kanji_data1,
+        match_id.kanji_data2,
+        match_id.kanji_data3,
+        match_id.kanji_data4,
+        match_id.kanji_data5,
+        match_id.kanji_data6,
+        match_id.kanji_data7,
+        match_id.kanji_data8,
+        match_id.kanji_data9
+        ]
+    review_kanji_data = []
+    for i in range(0, 10):
+        if(not review_kanji_id_list[i] == None):
+            match_kanji_id = session.query(Kanji).get(review_kanji_id_list[i])
+            temp = {
+                'kanji': match_kanji_id.kanji,
+                'kunyomi_roma': match_kanji_id.kunyomi_roma,
+                'kunyomi_ja': match_kanji_id.kunyomi_ja,
+                'onyomi_roma': match_kanji_id.onyomi_roma,
+                'onyomi_ja': match_kanji_id.onyomi_ja,
+            }
+            review_kanji_data.append(temp)
+    
+    # review_kanji_id_list.append(match_id.kanji_data0)
+    # print(f'review_kanji_data = {review_kanji_data}')
+    # print(f'review_kanji_session_arr = {review_kanji_id_list}')
+    review_kanji_id_list = [i for i in review_kanji_id_list if i != None]
+    print(f'review_kanji_id_list = {review_kanji_id_list}')
+    res = {'review_kanji_id':review_kanji_id_list, 'review_kanji_data':review_kanji_data}
+    return jsonify(res), 200
+
+
 
 @func.route('/review_details', methods=['POST'])
 @login_required

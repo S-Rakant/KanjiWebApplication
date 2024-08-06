@@ -61,6 +61,19 @@ class Review(db.Model):
     user_id = db.Column(db.Integer, primary_key = True, nullable = False)
     review_kanjiID_json = db.Column(db.String) #間違えた漢字IDをText型で保存.処理するときはJSON型として処理可能.
 
+class Review_KanjiID_Session(db.Model):
+    __tablename__ = 'review_kanjiID_session'
+    user_id = db.Column(db.Integer, primary_key = True, nullable = False)
+    kanji_data0 = db.Column(db.Integer, nullable = True)
+    kanji_data1 = db.Column(db.Integer, nullable = True)
+    kanji_data2 = db.Column(db.Integer, nullable = True)
+    kanji_data3 = db.Column(db.Integer, nullable = True)
+    kanji_data4 = db.Column(db.Integer, nullable = True)
+    kanji_data5 = db.Column(db.Integer, nullable = True)
+    kanji_data6 = db.Column(db.Integer, nullable = True)
+    kanji_data7 = db.Column(db.Integer, nullable = True)
+    kanji_data8 = db.Column(db.Integer, nullable = True)
+    kanji_data9 = db.Column(db.Integer, nullable = True)
 
 
 

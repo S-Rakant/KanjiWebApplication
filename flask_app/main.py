@@ -13,6 +13,7 @@ import random
 from dotenv import load_dotenv
 import os
 import ast
+from .myLogger import set_logger, getLogger
 
 
 from .models import Review, Kanji
@@ -23,6 +24,8 @@ url = os.getenv('SQLITE_DB_URL')
 
 main = Blueprint('main', __name__)
 
+set_logger()
+logger = getLogger(__name__)
 
 @main.route('/')
 @login_required

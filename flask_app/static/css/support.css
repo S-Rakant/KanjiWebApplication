@@ -1,7 +1,7 @@
 /* support.css */
 
 .main_container {
-    margin-top: 120px; /* ヘッダーの高さに合わせてマージンを設定 */
+    margin-top: 100px; /* ヘッダーの高さに合わせてマージンを設定 */
     padding: 20px; /* コンテンツのパディング */
     background-color: #fff; /* 背景色 */
     border-radius: 8px; /* 角丸 */

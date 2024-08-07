@@ -91,6 +91,26 @@
 
 .game_title {
     margin-bottom: 20px;
+    margin-left: 260px;
+}
+
+.game_mode_answer_container {
+    display: inline-block;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-right: 80px;
+
+}
+
+.whether_missed_before {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    background-color: red;
+    width: 175px;
+    
 }
 
 .question {

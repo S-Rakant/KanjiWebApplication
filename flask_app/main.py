@@ -12,6 +12,10 @@ import sqlalchemy
 import random
 from dotenv import load_dotenv
 import os
+import ast
+
+
+from .models import Review, Kanji
 
 load_dotenv()
 url = os.getenv('SQLITE_DB_URL')
@@ -19,14 +23,13 @@ url = os.getenv('SQLITE_DB_URL')
 
 main = Blueprint('main', __name__)
 
-engine = sqlalchemy.create_engine(url, echo=False)
-Session = sqlalchemy.orm.sessionmaker(bind=engine)
-session = Session()
 
 @main.route('/')
 @login_required
 def index():
-    # reg.register_user_to_solve_kanjis()
+    engine = sqlalchemy.create_engine(url, echo=False)
+    Session = sqlalchemy.orm.sessionmaker(bind=engine)
+    session = Session()
 
     #10位までのuserのスコアを取得
     ranking_infomations = models.Ranking.query.order_by(desc(models.Ranking.score)).limit(10)
@@ -40,10 +43,11 @@ def index():
         rank += 1
 
     
-    select = session.query(models.Kanji_ID_Session).filter_by(user_id = current_user.id).first()
+    select = session.query(models.Kanji_ID_Session).get(current_user.id)
     if(select != None):
         session.delete(select)
 
+    #create kanjiID session for quiz
     st_point = 0
     fin_point = 1235
     range_size = 10
@@ -63,7 +67,48 @@ def index():
         )
     session.add(kanji_id_session)
     session.commit()
+
+    #create kanjiID session for review
+    selected_review_kanjiID = []
+    review_kanji_id_list = []
+    match_id_review_table = session.query(models.Review).get(current_user.id)
+    if(not match_id_review_table == None):
+        review_kanji_id_string = match_id_review_table.review_kanjiID_json
+        review_kanji_id_list = ast.literal_eval(review_kanji_id_string)
+    else:
+        review_table = models.Review(user_id = current_user.id, review_kanjiID_json = '[]')
+        session.add(review_table)
+        session.commit()
+
+    for i in range(0, 10): #最大で10個idを格納,10よりも少ない場合は空いた場所にNoneを格納
+        if(len(review_kanji_id_list) > 0):
+            select_id = random.choice(review_kanji_id_list)
+            selected_review_kanjiID.append(select_id)
+            review_kanji_id_list.remove(select_id)
+        else:
+            selected_review_kanjiID.append(None)
+
+    match_id_review_kanjiID_session = session.query(models.Review_KanjiID_Session).get(current_user.id)
+    if(not match_id_review_kanjiID_session == None):
+        session.delete(match_id_review_kanjiID_session)
+
+    review_kanjiID_session_table = models.Review_KanjiID_Session(
+        user_id = current_user.id,
+        kanji_data0 = selected_review_kanjiID[0],
+        kanji_data1 = selected_review_kanjiID[1],
+        kanji_data2 = selected_review_kanjiID[2],
+        kanji_data3 = selected_review_kanjiID[3],
+        kanji_data4 = selected_review_kanjiID[4],
+        kanji_data5 = selected_review_kanjiID[5],
+        kanji_data6 = selected_review_kanjiID[6],
+        kanji_data7 = selected_review_kanjiID[7],
+        kanji_data8 = selected_review_kanjiID[8],
+        kanji_data9 = selected_review_kanjiID[9],
+    )
+    session.add(review_kanjiID_session_table)
+    session.commit()
     session.close()
+
 
     return render_template(
         'index.html',
@@ -80,6 +125,33 @@ def infomation():
 def support():
     return render_template(
         'support.html'
+    )
+
+@main.route('/ReviewList')
+@login_required
+def review():
+    engine = sqlalchemy.create_engine(url, echo=False)
+    Session = sqlalchemy.orm.sessionmaker(bind=engine)
+    session = Session()
+    match_id_review = session.query(Review).get(current_user.id)
+    miss_kanji_data = []
+    if(match_id_review != None):
+        miss_kanji_fromDB_list = ast.literal_eval(match_id_review.review_kanjiID_json)
+        #間違えた漢字IDの「漢字の詳細」を辞書形式でmiss_kanji_dataに格納
+        #render_templateの引数に指定
+        for kanji_id in miss_kanji_fromDB_list:
+            match_id_kanji = session.query(Kanji).get(kanji_id)
+            miss_kanji_data.append({
+                'kanji_id': match_id_kanji.kanji_id,
+                'kanji': match_id_kanji.kanji,
+                'kunoymi_roma': match_id_kanji.kunyomi_roma,
+                'kunyomi_ja': match_id_kanji.kunyomi_ja,
+                'onyomi_roma': match_id_kanji.onyomi_roma,
+                'onyomi_ja': match_id_kanji.onyomi_ja,
+                })
+    return render_template(
+        'review.html',
+        miss_kanji_data=miss_kanji_data,
     )
 
 def random_kanjiID_select(a, b, k):

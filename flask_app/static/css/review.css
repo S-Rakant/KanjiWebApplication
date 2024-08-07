@@ -1,0 +1,170 @@
+
+#top_container {
+    margin-top: 100px; /* ヘッダーの高さに合わせてマージンを設定 */
+    padding: 20px; /* コンテンツのパディング */
+    background-color: #fff; /* 背景色 */
+    border-radius: 8px; /* 角丸 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* ボックスシャドウ */
+    text-align: center;
+}
+
+#table-container {
+    width: 100%;
+    max-width: 600px;  /* 必要に応じて調整 */
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;  /* 横方向のスクロールを有効に */
+    overflow-y: auto;  /* 縦方向のスクロールを有効に */
+    max-height: 80vh;  /* 必要に応じて調整 */
+    margin: 20px auto;
+}
+
+#details_preview {
+    margin-top: 100px; /* ヘッダーの高さに合わせてマージンを設定 */
+    padding: 20px; /* コンテンツのパディング */
+    background-color: #fff; /* 背景色 */
+    border-radius: 8px; /* 角丸 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* ボックスシャドウ */
+    /* text-align: center; */
+    height: 80vh;
+}
+
+.hidden {
+    display: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+thead th {
+    background-color: #f2f2f2;
+    position: sticky;
+    top: 0;  /* ヘッダー行を固定 */
+    z-index: 1;
+}
+
+tbody td {
+    font-size: 30px;
+}
+
+tbody button {
+    width: 60px;
+    height: 30px;
+    transform: scale(1.5); /* チェックボックスのサイズを調整 */
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    width: 30px;
+    height: 30px;
+    transform: scale(1.5); /* チェックボックスのサイズを調整 */
+    cursor: pointer;
+}
+
+/* テーブル行のホバー効果 */
+tbody tr:hover {
+    background-color: #dff0d8; /* 背景色を緑色に変更 */
+}
+
+/* ボタンのスタイル */
+#send-info button {
+    background-color: #4CAF50; /* 緑色 */
+    color: white; /* ボタンの文字色を白に */
+    padding: 10px 20px; /* ボタンの内側の余白を設定 */
+    border: none; /* ボタンの境界線を消す */
+    border-radius: 5px; /* ボタンの角を丸くする */
+    cursor: pointer; /* カーソルをポインタに */
+    font-size: 16px; /* フォントサイズを設定 */
+}
+
+#send-info button:hover {
+    background-color: #45a049; /* ホバー時の色を少し濃く */
+}
+
+#none-review-info {
+    font-size: 30px;
+}
+
+#return_button_container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#return_button_container button:hover {
+    background-color: #3d9740;
+}
+
+#return_review_list {
+    background-color: #4CAF50; /* 緑色 */
+    color: white; /* ボタンの文字色を白に */
+    padding: 10px 20px; /* ボタンの内側の余白を設定 */
+    border: none; /* ボタンの境界線を消す */
+    border-radius: 5px; /* ボタンの角を丸くする */
+    cursor: pointer; /* カーソルをポインタに */
+    font-size: 20px; /* フォントサイズを設定 */
+    font-weight: bold;
+}
+
+#kanji_explanation_container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#kanji_content {
+    text-align: center;
+    margin: 10px auto;
+    border: solid #ddd;
+}
+
+#kanji_flame {
+    position: relative;
+    background-color: #dfdfe3;
+    width: 300px;
+    height: 300px;
+    margin: 5px auto;
+}
+
+#kanji {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-top: 50px;
+    font-size: 250px;
+}
+
+#kanji_yomi_contents {
+    text-align: center;
+    margin: 10px auto;
+    border: solid #ddd;
+    font-size: 20px;
+}
+
+#delete_kanji_button {
+    display: flex;
+    justify-content: right;
+    margin-top: 20px;
+}
+
+#delete_kanji_button button:hover{
+    background-color: #cf3a3a; /* 濃い赤色*/
+}
+
+#delete_kanji_from_review_table {
+    background-color: #e14343; /* 赤色 */
+    color: white; /* ボタンの文字色を白に */
+    padding: 10px 20px; /* ボタンの内側の余白を設定 */
+    border: none; /* ボタンの境界線を消す */
+    border-radius: 5px; /* ボタンの角を丸くする */
+    cursor: pointer; /* カーソルをポインタに */
+    font-size: 20px; /* フォントサイズを設定 */
+    font-weight: bold;
+}

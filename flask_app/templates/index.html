@@ -15,42 +15,53 @@
             {% include 'navigation.html' %}
         </nav>
     </header>
-    <main id="top_container">
-        <div class="start">
-            <button id="start-button">GAME START</button>
-        </div>
-        <div class="game-modes">
-            <label class="game-mode">
-                <input type="radio" name="game-mode-select" value="quiz">Kanji Quiz
-            </label>
-            <label class="game-mode">
-                <input type="radio" name="game-mode-select" value="review">Review
-            </label>
-        </div>
-        <div class="score_info">
-            <p class="score_table_title">👑RANKING👑</p>
-            {% if ranking_info == [] %}
-            <p class="none_score_info">No information yet</p>
-            {% else %}
-            <table class="score_table" border="1">
-                <tr>
-                    <th>Rank</th>
-                    <th>User Name</th>
-                    <th>Score</th>
-                    <th>Play Time</th>
-                </tr>
-                {% for info in ranking_info %}
-                <tr>
-                    <td>{{  info.rank }}</td>
-                    <td>{{ info.username }}</td>
-                    <td>{{ info.score }}</td>
-                    <td>{{ info.playtime}}</td>
-                </tr>
+    <div id="entire_container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages%}
+                    <div class="flash_{{ category }}">
+                        <p>{{ message }}</p>
+                    </div>
                 {% endfor %}
-            </table>
             {% endif %}
-        </div>
-    </main>
+        {% endwith %}
+        <main id="top_container">
+            <div class="start">
+                <button id="start-button">GAME START</button>
+            </div>
+            <div class="game-modes">
+                <label class="game-mode">
+                    <input type="radio" name="game-mode-select" value="quiz">Kanji Quiz
+                </label>
+                <label class="game-mode">
+                    <input type="radio" name="game-mode-select" value="review">Review
+                </label>
+            </div>
+            <div class="score_info">
+                <p class="score_table_title">👑RANKING👑</p>
+                {% if ranking_info == [] %}
+                <p class="none_score_info">No information yet</p>
+                {% else %}
+                <table class="score_table" border="1">
+                    <tr>
+                        <th>Rank</th>
+                        <th>User Name</th>
+                        <th>Score</th>
+                        <th>Play Time</th>
+                    </tr>
+                    {% for info in ranking_info %}
+                    <tr>
+                        <td>{{  info.rank }}</td>
+                        <td>{{ info.username }}</td>
+                        <td>{{ info.score }}</td>
+                        <td>{{ info.playtime}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% endif %}
+            </div>
+        </main>
+    </div>
     <main id="game_answer_container" class="hidden">
         <div class="game_title">
             <div class="game_mode_answer_container">

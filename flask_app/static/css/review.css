@@ -15,7 +15,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow-x: auto;  /* 横方向のスクロールを有効に */
     overflow-y: auto;  /* 縦方向のスクロールを有効に */
-    max-height: 80vh;  /* 必要に応じて調整 */
+    max-height: 70vh;  /* 必要に応じて調整 */
     margin: 20px auto;
 }
 
@@ -26,7 +26,7 @@
     border-radius: 8px; /* 角丸 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* ボックスシャドウ */
     /* text-align: center; */
-    height: 80vh;
+    height: 85vh;
 }
 
 .hidden {
@@ -44,11 +44,11 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 
-thead th {
-    background-color: #f2f2f2;
+thead tr {
     position: sticky;
-    top: 0;  /* ヘッダー行を固定 */
+    top: 0;
     z-index: 1;
+    background-color: #f2f2f2;
 }
 
 tbody td {
@@ -93,10 +93,10 @@ tbody tr:hover {
     font-size: 30px;
 }
 
-#return_button_container {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
+/* #return_button_container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+} */
 
 #return_button_container button:hover {
     background-color: #3d9740;
@@ -148,11 +148,15 @@ tbody tr:hover {
     font-size: 20px;
 }
 
-#delete_kanji_button {
+.button_container {
     display: flex;
-    justify-content: right;
-    margin-top: 20px;
+    justify-content: space-between;
 }
+
+/* #delete_kanji_button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+} */
 
 #delete_kanji_button button:hover{
     background-color: #cf3a3a; /* 濃い赤色*/

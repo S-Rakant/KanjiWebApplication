@@ -1,9 +1,21 @@
 /* Main Container Styles */
-#top_container,
 #game_answer_container,
 #result_container {
     max-width: 1200px;
     margin: 100px auto 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#entire_container {
+    margin: 100px 0;
+}
+
+#top_container {
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
@@ -254,3 +266,20 @@
         font-size: 14px;
     }
 }
+
+div.flash_login_success {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 440px;
+    height: 40px;
+    margin: 5px auto;
+    background-color: rgb(69, 255, 69);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .flash p {
+    width: fit-content;
+    text-align: center;
+  }

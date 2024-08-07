@@ -25,7 +25,10 @@ def register():
         db.session.add(user)
         db.session.commit()
         print(f'☆☆☆☆☆ UserID : {form.username.data} created account successfully ☆☆☆☆☆')
+        flash('Regist your account successfully!', 'regist_success')
         return redirect(url_for('auth.login'))
+    if (form.username.data != None) & (form.password.data != None) & (form.confirm_password != None):
+        flash('!! Invalid user ID or password !!', 'regist_error')
     return render_template('register.html', form=form)
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -36,8 +39,11 @@ def login():
         if user and user.check_password(form.password.data):
             login_user(user)
             print(f'☆☆☆☆☆ UserID : {form.username.data} Login ☆☆☆☆☆')
+            session["uesr_name"] = form.username.data
+            flash('Login successfully! Welcome to Kanji Quiz!', 'login_success')
             return redirect(url_for('main.index'))
         else:
+            flash('!! Invalid user ID or password !!', 'login_error')
             print(f'failed Login')
     return render_template('login.html', form=form)
 
@@ -46,4 +52,6 @@ def login():
 def logout():
     print(f'☆☆☆☆☆ UserID : {current_user.username} was Loggedout ☆☆☆☆☆')
     logout_user()
+    session.clear()
+    flash('Logout successfully!!', 'logout_success')
     return redirect(url_for('auth.login'))

@@ -72,3 +72,33 @@ div.register a {
 div.register a:hover {
   text-decoration: underline;
 }
+
+div.flash_login_error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 440px;
+  height: 40px;
+  margin: 5px auto;
+  background-color: rgb(255, 86, 86);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+div.flash_regist_success,
+div.flash_logout_success {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 440px;
+  height: 40px;
+  margin: 5px auto;
+  background-color: rgb(69, 255, 69);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.flash p {
+  width: fit-content;
+  text-align: center;
+}

@@ -57,3 +57,45 @@ span.error-message {
   color: red;
   font-size: 14px;
 }
+
+div.flash_regist_error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 440px;
+  height: 40px;
+  margin: 5px auto;
+  background-color: rgb(255, 86, 86);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.flash p {
+  width: fit-content;
+  text-align: center;
+}
+
+a.sign_in_container {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  display: flex;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  justify-content: center;
+}
+
+a.sign_in_container {
+  text-decoration: none;
+}
+
+a.sign_in_container:hover {
+  background-color: #45a049;
+}
+
+a.sign_in_container :visited {
+  color: white;
+}

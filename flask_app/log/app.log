@@ -1,0 +1,142 @@
+2024-08-08 14:47:13,503 : INFO : _internal.py - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-08 14:47:13,503 : INFO : _internal.py - [33mPress CTRL+C to quit[0m
+2024-08-08 14:47:13,504 : INFO : _internal.py -  * Restarting with stat
+2024-08-08 14:47:14,054 : WARNING : _internal.py -  * Debugger is active!
+2024-08-08 14:47:14,058 : INFO : _internal.py -  * Debugger PIN: 578-790-904
+2024-08-08 14:47:16,421 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:47:16] "[32mGET / HTTP/1.1[0m" 302 -
+2024-08-08 14:47:16,460 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:47:16] "GET /auth/login?next=/ HTTP/1.1" 200 -
+2024-08-08 14:47:16,502 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:47:16] "[36mGET /static/css/login.css HTTP/1.1[0m" 304 -
+2024-08-08 14:47:22,654 : INFO : auth.py - ############### UserID : ako Login ###############
+2024-08-08 14:47:22,655 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:47:22] "[32mPOST /auth/login HTTP/1.1[0m" 302 -
+2024-08-08 14:47:22,685 : INFO : main.py - UserName:[ako]--**Index**
+2024-08-08 14:47:22,691 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:47:22] "GET / HTTP/1.1" 200 -
+2024-08-08 14:47:22,718 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:47:22] "GET /static/css/index.css HTTP/1.1" 200 -
+2024-08-08 14:47:22,723 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:47:22] "[36mGET /static/css/navigation.css HTTP/1.1[0m" 304 -
+2024-08-08 14:47:22,739 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:47:22] "[36mGET /static/js/game.js HTTP/1.1[0m" 304 -
+2024-08-08 14:47:22,741 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:47:22] "[36mGET /static/img/Home_icon.png HTTP/1.1[0m" 304 -
+2024-08-08 14:47:57,058 : INFO : _internal.py - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-08 14:47:57,058 : INFO : _internal.py - [33mPress CTRL+C to quit[0m
+2024-08-08 14:47:57,059 : INFO : _internal.py -  * Restarting with stat
+2024-08-08 14:47:57,587 : WARNING : _internal.py -  * Debugger is active!
+2024-08-08 14:47:57,587 : INFO : _internal.py -  * Debugger PIN: 578-790-904
+2024-08-08 14:48:00,082 : INFO : main.py - UserName:[ako]--**Index**
+2024-08-08 14:48:00,092 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:48:00] "GET / HTTP/1.1" 200 -
+2024-08-08 14:48:00,125 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:48:00] "[36mGET /static/css/index.css HTTP/1.1[0m" 304 -
+2024-08-08 14:48:00,128 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:48:00] "[36mGET /static/css/navigation.css HTTP/1.1[0m" 304 -
+2024-08-08 14:48:00,147 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:48:00] "[36mGET /static/js/game.js HTTP/1.1[0m" 304 -
+2024-08-08 14:48:00,152 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:48:00] "[36mGET /static/img/Home_icon.png HTTP/1.1[0m" 304 -
+2024-08-08 14:48:14,840 : INFO : main.py - UserName:[ako]--**Index**
+2024-08-08 14:48:14,842 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:48:14] "GET / HTTP/1.1" 200 -
+2024-08-08 14:48:14,872 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:48:14] "[36mGET /static/css/index.css HTTP/1.1[0m" 304 -
+2024-08-08 14:48:14,884 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:48:14] "[36mGET /static/css/navigation.css HTTP/1.1[0m" 304 -
+2024-08-08 14:48:14,890 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:48:14] "[36mGET /static/js/game.js HTTP/1.1[0m" 304 -
+2024-08-08 14:48:14,894 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:48:14] "[36mGET /static/img/Home_icon.png HTTP/1.1[0m" 304 -
+2024-08-08 14:48:16,631 : INFO : func.py - UserName:[ako]--**get_kanjiID_missed_before**
+2024-08-08 14:48:16,631 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:48:16] "GET /func/get_kanjiID_missed_before HTTP/1.1" 200 -
+2024-08-08 14:48:16,648 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:48:16,649 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:48:16] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:48:18,450 : INFO : main.py - UserName:[ako]--**Index**
+2024-08-08 14:48:18,451 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:48:18] "GET / HTTP/1.1" 200 -
+2024-08-08 14:48:18,477 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:48:18] "[36mGET /static/css/index.css HTTP/1.1[0m" 304 -
+2024-08-08 14:48:18,483 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:48:18] "[36mGET /static/css/navigation.css HTTP/1.1[0m" 304 -
+2024-08-08 14:48:18,495 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:48:18] "[36mGET /static/js/game.js HTTP/1.1[0m" 304 -
+2024-08-08 14:48:18,500 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:48:18] "[36mGET /static/img/Home_icon.png HTTP/1.1[0m" 304 -
+2024-08-08 14:52:29,316 : INFO : _internal.py - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-08 14:52:29,316 : INFO : _internal.py - [33mPress CTRL+C to quit[0m
+2024-08-08 14:52:29,316 : INFO : _internal.py -  * Restarting with stat
+2024-08-08 14:52:29,867 : WARNING : _internal.py -  * Debugger is active!
+2024-08-08 14:52:29,868 : INFO : _internal.py -  * Debugger PIN: 578-790-904
+2024-08-08 14:52:31,491 : INFO : main.py - UserName:[ako]--**Index**
+2024-08-08 14:52:31,504 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:31] "GET / HTTP/1.1" 200 -
+2024-08-08 14:52:31,528 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:31] "[36mGET /static/css/index.css HTTP/1.1[0m" 304 -
+2024-08-08 14:52:31,531 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:31] "[36mGET /static/css/navigation.css HTTP/1.1[0m" 304 -
+2024-08-08 14:52:31,547 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:31] "[36mGET /static/js/game.js HTTP/1.1[0m" 304 -
+2024-08-08 14:52:31,550 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:31] "[36mGET /static/img/Home_icon.png HTTP/1.1[0m" 304 -
+2024-08-08 14:52:35,257 : INFO : func.py - UserName:[ako]--**get_kanjiID_missed_before**
+2024-08-08 14:52:35,258 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:35] "GET /func/get_kanjiID_missed_before HTTP/1.1" 200 -
+2024-08-08 14:52:35,282 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:35,283 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:35] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:36,116 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:36,117 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:36] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:36,829 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:36,830 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:36] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:37,645 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:37,645 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:37] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:38,190 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:38,191 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:38] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:38,629 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:38,629 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:38] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:39,469 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:39,470 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:39] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:40,069 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:40,070 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:40] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:40,729 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:40,729 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:40] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:41,255 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:41,256 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:41] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:41,757 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:41,758 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:41] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:42,588 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:42,589 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:42] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:43,166 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:43,166 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:43] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:44,046 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:44,046 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:44] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:44,639 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:44,640 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:44] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:45,126 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:45,127 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:45] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:46,435 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:46,436 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:46] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:47,649 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:47,649 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:47] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:48,617 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:48,618 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:48] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:49,303 : INFO : func.py - UserName:[ako]--**fetch_data_from_kanjiID_session**
+2024-08-08 14:52:49,304 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:49] "GET /func/fetch_data_from_kanjiID_session HTTP/1.1" 200 -
+2024-08-08 14:52:49,933 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:49] "POST /manage/regist_ranking HTTP/1.1" 200 -
+2024-08-08 14:52:49,950 : INFO : manage.py - UserName:[ako]--**regist_mistake_kanjiID**
+2024-08-08 14:52:49,951 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:49] "POST /manage/regist_mistake_kanjiID HTTP/1.1" 200 -
+2024-08-08 14:52:51,377 : INFO : main.py - UserName:[ako]--**Index**
+2024-08-08 14:52:51,378 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:51] "GET / HTTP/1.1" 200 -
+2024-08-08 14:52:51,404 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:51] "[36mGET /static/css/index.css HTTP/1.1[0m" 304 -
+2024-08-08 14:52:51,413 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:51] "[36mGET /static/css/navigation.css HTTP/1.1[0m" 304 -
+2024-08-08 14:52:51,423 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:51] "[36mGET /static/js/game.js HTTP/1.1[0m" 304 -
+2024-08-08 14:52:51,427 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:51] "[36mGET /static/img/Home_icon.png HTTP/1.1[0m" 304 -
+2024-08-08 14:52:52,870 : INFO : main.py - UserName:[ako]--**Review_List**
+2024-08-08 14:52:52,875 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:52] "GET /ReviewList HTTP/1.1" 200 -
+2024-08-08 14:52:52,901 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:52] "[36mGET /static/css/review.css HTTP/1.1[0m" 304 -
+2024-08-08 14:52:52,906 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:52] "[36mGET /static/css/navigation.css HTTP/1.1[0m" 304 -
+2024-08-08 14:52:52,908 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:52] "[36mGET /static/js/review.js HTTP/1.1[0m" 304 -
+2024-08-08 14:52:52,920 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:52] "[36mGET /static/img/Home_icon.png HTTP/1.1[0m" 304 -
+2024-08-08 14:52:54,945 : INFO : func.py - UserName:[ako]--**fetch_review_details_data**
+2024-08-08 14:52:54,946 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:54] "POST /func/review_details HTTP/1.1" 200 -
+2024-08-08 14:52:56,018 : INFO : func.py - UserName:[ako]--**delete_kanji_from_review_table**
+2024-08-08 14:52:56,018 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:56] "POST /func/delete_kanji_from_review_table HTTP/1.1" 200 -
+2024-08-08 14:52:56,042 : INFO : main.py - UserName:[ako]--**Review_List**
+2024-08-08 14:52:56,043 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:56] "GET /ReviewList HTTP/1.1" 200 -
+2024-08-08 14:52:56,068 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:56] "[36mGET /static/css/review.css HTTP/1.1[0m" 304 -
+2024-08-08 14:52:56,074 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:56] "[36mGET /static/css/navigation.css HTTP/1.1[0m" 304 -
+2024-08-08 14:52:56,077 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:56] "[36mGET /static/js/review.js HTTP/1.1[0m" 304 -
+2024-08-08 14:52:56,088 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:56] "[36mGET /static/img/Home_icon.png HTTP/1.1[0m" 304 -
+2024-08-08 14:52:57,440 : INFO : func.py - UserName:[ako]--**fetch_review_details_data**
+2024-08-08 14:52:57,441 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:57] "POST /func/review_details HTTP/1.1" 200 -
+2024-08-08 14:52:58,555 : INFO : func.py - UserName:[ako]--**delete_kanji_from_review_table**
+2024-08-08 14:52:58,556 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:58] "POST /func/delete_kanji_from_review_table HTTP/1.1" 200 -
+2024-08-08 14:52:58,580 : INFO : main.py - UserName:[ako]--**Review_List**
+2024-08-08 14:52:58,581 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:58] "GET /ReviewList HTTP/1.1" 200 -
+2024-08-08 14:52:58,604 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:58] "[36mGET /static/css/review.css HTTP/1.1[0m" 304 -
+2024-08-08 14:52:58,609 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:58] "[36mGET /static/css/navigation.css HTTP/1.1[0m" 304 -
+2024-08-08 14:52:58,611 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:58] "[36mGET /static/js/review.js HTTP/1.1[0m" 304 -
+2024-08-08 14:52:58,622 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:52:58] "[36mGET /static/img/Home_icon.png HTTP/1.1[0m" 304 -
+2024-08-08 14:53:02,460 : INFO : func.py - UserName:[ako]--**delete_checked_kanji_from_review_table**
+2024-08-08 14:53:02,461 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:53:02] "POST /func/delete_checked_kanji_from_review_table HTTP/1.1" 200 -
+2024-08-08 14:53:02,483 : INFO : main.py - UserName:[ako]--**Review_List**
+2024-08-08 14:53:02,484 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:53:02] "GET /ReviewList HTTP/1.1" 200 -
+2024-08-08 14:53:02,506 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:53:02] "[36mGET /static/css/review.css HTTP/1.1[0m" 304 -
+2024-08-08 14:53:02,511 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:53:02] "[36mGET /static/css/navigation.css HTTP/1.1[0m" 304 -
+2024-08-08 14:53:02,513 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:53:02] "[36mGET /static/js/review.js HTTP/1.1[0m" 304 -
+2024-08-08 14:53:02,526 : INFO : _internal.py - 127.0.0.1 - - [08/Aug/2024 14:53:02] "[36mGET /static/img/Home_icon.png HTTP/1.1[0m" 304 -

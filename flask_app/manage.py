@@ -4,13 +4,13 @@ from .models import Ranking, Review
 from datetime import datetime
 
 import sqlalchemy
-from dotenv import load_dotenv
-import os
+# from dotenv import load_dotenv
 import ast
 from .myLogger import getLogger
+from . import config
 
-load_dotenv()
-url = os.getenv('SQLITE_DB_URL')
+# load_dotenv()
+url = config.Config.SQLITE_DB_URL
 
 manage = Blueprint('manage', __name__, url_prefix='/manage')
 

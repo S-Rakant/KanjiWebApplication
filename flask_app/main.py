@@ -6,20 +6,20 @@ from . import register_kanji as reg
 from flask import render_template, request, abort
 from flask import jsonify, Blueprint
 from flask_login import login_required, current_user, login_user, logout_user
-import sqlite3
 from sqlalchemy import desc
 import sqlalchemy
 import random
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 import ast
 from .myLogger import set_logger, getLogger
+from . import config
 
 
 from .models import Review, Kanji
 
-load_dotenv()
-url = os.getenv('SQLITE_DB_URL')
+# load_dotenv()
+url = config.Config.SQLITE_DB_URL
 
 
 main = Blueprint('main', __name__)

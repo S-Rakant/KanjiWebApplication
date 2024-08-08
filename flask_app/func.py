@@ -3,19 +3,19 @@ from . import db
 
 from flask import Blueprint, jsonify, abort, session, request
 from flask_login import current_user, login_required
-import sqlite3
 from sqlalchemy import MetaData, Table
 import sqlalchemy
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 from .models import Kanji, Review, Kanji_ID_Session, Review_KanjiID_Session
 import ast
 import random
 from .myLogger import getLogger
+from . import config
 
 
-load_dotenv()
-url = os.getenv('SQLITE_DB_URL')
+# load_dotenv()
+url = config.Config.SQLITE_DB_URL
 
 func = Blueprint('func', __name__, url_prefix='/func')
 

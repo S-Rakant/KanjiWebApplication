@@ -7,11 +7,14 @@ import sqlalchemy
 from dotenv import load_dotenv
 import os
 import ast
+from .myLogger import getLogger
 
 load_dotenv()
 url = os.getenv('SQLITE_DB_URL')
 
 manage = Blueprint('manage', __name__, url_prefix='/manage')
+
+logger = getLogger(__name__)
 
 #jsからuserのscoreと時刻、UserMixinからusernameの情報を受け取り、rankingデータベースに登録する
 #呼び出しはjs内からデコレータを用いて行う
@@ -19,6 +22,7 @@ manage = Blueprint('manage', __name__, url_prefix='/manage')
 @manage.route('/regist_ranking', methods=['GET', 'POST'])
 def regist_ranking():
     print('reach!!')
+    update = 'none update'
     if(not current_user.is_authenticated):
         return jsonify({'message': 'Session was expired!'}), 400
     engine = sqlalchemy.create_engine(url, echo=False)
@@ -30,6 +34,7 @@ def regist_ranking():
     if(match_id == None):
         pass
     elif(data.get('score') >= match_id.score):
+        update = 'update'
         session.delete(match_id)
     else:
         return jsonify({'message': 'Ranking Registered Successfully'}), 200
@@ -40,6 +45,7 @@ def regist_ranking():
     session.add(ranking_table)
     session.commit()
     session.close()
+    logger.info(f'UserName:[{current_user.username}]--**regist_ranking - {update}**')
     return jsonify({'message': 'Ranking Registered Successfully'}), 200
 
 @manage.route('/regist_mistake_kanjiID', methods=['POST'])
@@ -66,6 +72,7 @@ def regist_mistake_kanjiID():
     session.commit()
     session.close()
     print('regist_mistake_kanjIID = ' + str(miss_kanjiID))
+    logger.info(f'UserName:[{current_user.username}]--**regist_mistake_kanjiID**')
     return jsonify({'message': 'regist_mistake KanjiID Successfully!'}), 200
 
 #MEMO

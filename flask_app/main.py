@@ -112,7 +112,7 @@ def index():
     session.commit()
     session.close()
 
-
+    logger.info(f'UserName:[{current_user.username}]--**Index**')
     return render_template(
         'index.html',
         ranking_info = ranking_data,
@@ -120,12 +120,14 @@ def index():
 
 @main.route('/Infomation')
 def infomation():
+    logger.info(f'UserName:[{current_user.username}]--**Infomation**')
     return render_template(
         'infomation.html'
     )
 
 @main.route('/Support')
 def support():
+    logger.info(f'UserName:[{current_user.username}]--**Support**')
     return render_template(
         'support.html'
     )
@@ -152,6 +154,7 @@ def review():
                 'onyomi_roma': match_id_kanji.onyomi_roma,
                 'onyomi_ja': match_id_kanji.onyomi_ja,
                 })
+    logger.info(f'UserName:[{current_user.username}]--**Review_List**')
     return render_template(
         'review.html',
         miss_kanji_data=miss_kanji_data,

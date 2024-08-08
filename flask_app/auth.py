@@ -8,8 +8,10 @@ from .forms import RegistrationForm, LoginForm
 from .models import User
 
 from . import db
+from .myLogger import getLogger
 
 auth = Blueprint('auth', __name__, url_prefix='/auth')
+logger = getLogger(__name__)
 
 
 @login_manager.user_loader
@@ -24,7 +26,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        print(f'☆☆☆☆☆ UserID : {form.username.data} created account successfully ☆☆☆☆☆')
+        logger.info(f'############### UserID : {form.username.data} created account successfully ###############')
         flash('Regist your account successfully!', 'regist_success')
         return redirect(url_for('auth.login'))
     if (form.username.data != None) & (form.password.data != None) & (form.confirm_password != None):
@@ -38,7 +40,7 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user and user.check_password(form.password.data):
             login_user(user)
-            print(f'☆☆☆☆☆ UserID : {form.username.data} Login ☆☆☆☆☆')
+            logger.info(f'############### UserID : {form.username.data} Login ###############')
             session["uesr_name"] = form.username.data
             flash('Login successfully! Welcome to Kanji Quiz!', 'login_success')
             return redirect(url_for('main.index'))
@@ -50,7 +52,7 @@ def login():
 @auth.route('/logout')
 @login_required
 def logout():
-    print(f'☆☆☆☆☆ UserID : {current_user.username} was Loggedout ☆☆☆☆☆')
+    logger.info(f'############### UserID : {current_user.username} was Loggedout ###############')
     logout_user()
     session.clear()
     flash('Logout successfully!!', 'logout_success')

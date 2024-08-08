@@ -8,6 +8,7 @@ from flask_wtf.csrf import CSRFProtect
 import os
 from datetime import timedelta
 
+load_dotenv()
 db = SQLAlchemy()
 login_manager = LoginManager()
 app = Flask(__name__)
@@ -16,7 +17,6 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlite.db'
 # csrf = CSRFProtect(app) #csrf_tokenがsession毎に自動で生成される
 
-load_dotenv()
 
 def create_app():
 

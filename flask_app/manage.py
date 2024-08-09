@@ -1,16 +1,17 @@
 from flask import Blueprint, request, jsonify
-from flask_login import current_user
+from flask_login import current_user, login_required
+from flask_wtf.csrf import CSRFError
 from .models import Ranking, Review
 from datetime import datetime
 
 import sqlalchemy
-from dotenv import load_dotenv
-import os
+# from dotenv import load_dotenv
 import ast
 from .myLogger import getLogger
+from . import config
 
-load_dotenv()
-url = os.getenv('SQLITE_DB_URL')
+# load_dotenv()
+url = config.Config.SQLITE_DB_URL
 
 manage = Blueprint('manage', __name__, url_prefix='/manage')
 
@@ -20,6 +21,7 @@ logger = getLogger(__name__)
 #呼び出しはjs内からデコレータを用いて行う
 
 @manage.route('/regist_ranking', methods=['GET', 'POST'])
+@manage.errorhandler(CSRFError)
 def regist_ranking():
     print('reach!!')
     update = 'none update'
@@ -49,6 +51,7 @@ def regist_ranking():
     return jsonify({'message': 'Ranking Registered Successfully'}), 200
 
 @manage.route('/regist_mistake_kanjiID', methods=['POST'])
+@manage.errorhandler(CSRFError)
 def regist_mistake_kanjiID():
     engine = sqlalchemy.create_engine(url, echo=False)
     Session = sqlalchemy.orm.sessionmaker(bind=engine)
@@ -74,6 +77,35 @@ def regist_mistake_kanjiID():
     print('regist_mistake_kanjIID = ' + str(miss_kanjiID))
     logger.info(f'UserName:[{current_user.username}]--**regist_mistake_kanjiID**')
     return jsonify({'message': 'regist_mistake KanjiID Successfully!'}), 200
+
+@manage.route('/delete_correct_answer_kanji_from_review_table', methods=['POST'])
+@manage.errorhandler(CSRFError)
+@login_required
+def delete_correct_answer_kanji_from_review_table():
+    engine = sqlalchemy.create_engine(url, echo=False)
+    Session = sqlalchemy.orm.sessionmaker(bind=engine)
+    session = Session()
+    match_uer_id = session.query(Review).get(current_user.id)
+    checked_kanjiID_list = request.get_json()
+    if(checked_kanjiID_list == []):
+        return jsonify({'message': 'no checked kanji'}), 200
+    else:
+        user_review_kanji_list = match_uer_id.review_kanjiID_json
+        string_to_user_review_kanji_list = ast.literal_eval(user_review_kanji_list)
+        print(f'string_to_user_review_list = {string_to_user_review_kanji_list}')
+        to_int_checked_kanji_list = []
+        for item in checked_kanjiID_list:
+            to_int_checked_kanji_list.append(int(item))
+        print(f'checked_kanjiID_list = {to_int_checked_kanji_list}')
+        removed_list = [item for item in string_to_user_review_kanji_list if item not in to_int_checked_kanji_list]
+        print(removed_list)
+        session.delete(match_uer_id)
+        update_missed_kanjiID = Review(user_id=current_user.id, review_kanjiID_json=str(removed_list))
+        session.add(update_missed_kanjiID)
+        session.commit()
+        session.close()
+        logger.info(f'UserName:[{current_user.username}]--**delete_correct_answer_kanji_from_review_table**')
+        return jsonify({'message': 'update review table'}), 200
 
 #MEMO
 #(rankingに登録されているuseridとcurrent_user.idが一致する行があり∧受け取った方が高い)or(一致する行がない)

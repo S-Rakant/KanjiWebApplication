@@ -6,20 +6,21 @@ from . import register_kanji as reg
 from flask import render_template, request, abort
 from flask import jsonify, Blueprint
 from flask_login import login_required, current_user, login_user, logout_user
-import sqlite3
+from flask_wtf.csrf import CSRFError
 from sqlalchemy import desc
 import sqlalchemy
 import random
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 import ast
 from .myLogger import set_logger, getLogger
+from . import config
 
 
 from .models import Review, Kanji
 
-load_dotenv()
-url = os.getenv('SQLITE_DB_URL')
+# load_dotenv()
+url = config.Config.SQLITE_DB_URL
 
 
 main = Blueprint('main', __name__)
@@ -28,6 +29,7 @@ set_logger()
 logger = getLogger(__name__)
 
 @main.route('/')
+@main.errorhandler(CSRFError)
 @login_required
 def index():
     engine = sqlalchemy.create_engine(url, echo=False)
@@ -119,6 +121,7 @@ def index():
     )
 
 @main.route('/Infomation')
+@main.errorhandler(CSRFError)
 def infomation():
     logger.info(f'UserName:[{current_user.username}]--**Infomation**')
     return render_template(
@@ -126,6 +129,7 @@ def infomation():
     )
 
 @main.route('/Support')
+@main.errorhandler(CSRFError)
 def support():
     logger.info(f'UserName:[{current_user.username}]--**Support**')
     return render_template(
@@ -133,6 +137,7 @@ def support():
     )
 
 @main.route('/ReviewList')
+@main.errorhandler(CSRFError)
 @login_required
 def review():
     engine = sqlalchemy.create_engine(url, echo=False)

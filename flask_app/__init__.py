@@ -2,25 +2,29 @@ from flask import Flask, session, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from flask import current_app
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from flask_wtf.csrf import CSRFProtect
+from . import config
 
 import os
 from datetime import timedelta
 
-load_dotenv()
+# load_dotenv()
 db = SQLAlchemy()
 login_manager = LoginManager()
 app = Flask(__name__)
+csrf = CSRFProtect()
 app.permanent_session_lifetime = timedelta(minutes=250)
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlite.db'
-# csrf = CSRFProtect(app) #csrf_tokenがsession毎に自動で生成される
+# app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['SECRET_KEY'] = config.Config.SECRET_KEY
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlite.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = config.Config.SQLITE_DB_URL
 
 
 def create_app():
 
     db.init_app(app)
+    csrf.init_app(app)
 
     with app.app_context(): #アプリケーションコンテキスト
         db.create_all()

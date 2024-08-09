@@ -3,19 +3,21 @@ from . import db
 
 from flask import Blueprint, jsonify, abort, session, request
 from flask_login import current_user, login_required
-import sqlite3
 from sqlalchemy import MetaData, Table
 import sqlalchemy
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 from .models import Kanji, Review, Kanji_ID_Session, Review_KanjiID_Session
 import ast
 import random
 from .myLogger import getLogger
+from . import config
+
+from flask_wtf.csrf import CSRFError
 
 
-load_dotenv()
-url = os.getenv('SQLITE_DB_URL')
+# load_dotenv()
+url = config.Config.SQLITE_DB_URL
 
 func = Blueprint('func', __name__, url_prefix='/func')
 
@@ -23,6 +25,7 @@ logger = getLogger(__name__)
 
 
 @func.route('/fetch_data_from_kanjiID_session', methods=['GET'])
+@func.errorhandler(CSRFError)
 def fetch_data_from_kanjiID_session():
     #sessionが切れていたらloginを促す
     if(not current_user.is_authenticated):
@@ -51,6 +54,7 @@ def fetch_data_from_kanjiID_session():
     return jsonify(res), 200
 
 @func.route('/fetch_data_from_review_sessiom_table', methods=['GET'])
+@func.errorhandler(CSRFError)
 def fetch_data_from_review_session_table():
     #sessionが切れていたらloginを促す
     if(not current_user.is_authenticated):
@@ -96,6 +100,7 @@ def fetch_data_from_review_session_table():
 
 
 @func.route('/review_details', methods=['POST'])
+@func.errorhandler(CSRFError)
 @login_required
 def review_details():
     data = request.get_json()
@@ -117,6 +122,7 @@ def review_details():
     return jsonify(data)
 
 @func.route('/delete_kanji_from_review_table', methods=['POST'])
+@func.errorhandler(CSRFError)
 @login_required
 def delete_kanji_from_review_table():
     engine = sqlalchemy.create_engine(url, echo=False)
@@ -143,6 +149,7 @@ def delete_kanji_from_review_table():
     return jsonify({'message': 'success'}), 200
 
 @func.route('/delete_checked_kanji_from_review_table', methods=['POST'])
+@func.errorhandler(CSRFError)
 @login_required
 def delete_checked_kanji_from_review_table():
     engine = sqlalchemy.create_engine(url, echo=False)
@@ -169,8 +176,9 @@ def delete_checked_kanji_from_review_table():
         session.close()
         logger.info(f'UserName:[{current_user.username}]--**delete_checked_kanji_from_review_table**')
         return jsonify({'message': 'update review table'}), 200
-
+    
 @func.route('/get_kanjiID_missed_before', methods=['GET'])
+@func.errorhandler(CSRFError)
 @login_required
 def get_kanjiID_missed_before():
     engine = sqlalchemy.create_engine(url, echo=False)

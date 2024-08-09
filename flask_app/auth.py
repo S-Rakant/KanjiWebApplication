@@ -2,6 +2,7 @@ from flask import Blueprint, request, render_template, flash, redirect, url_for
 from . import login_manager
 from flask_login import login_required, login_user, logout_user, current_user
 from flask import session, abort
+from flask_wtf.csrf import CSRFError
 
 
 from .forms import RegistrationForm, LoginForm 
@@ -19,6 +20,7 @@ def load_user(user_id):
     return User.query.get(int(user_id)) #user_idとマッチした行を取り出す
 
 @auth.route('/register', methods=['GET', 'POST'])
+@auth.errorhandler(CSRFError)
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -34,6 +36,7 @@ def register():
     return render_template('register.html', form=form)
 
 @auth.route('/login', methods=['GET', 'POST'])
+@auth.errorhandler(CSRFError)
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -50,6 +53,7 @@ def login():
     return render_template('login.html', form=form)
 
 @auth.route('/logout')
+@auth.errorhandler(CSRFError)
 @login_required
 def logout():
     logger.info(f'############### UserID : {current_user.username} was Loggedout ###############')

@@ -1,20 +1,31 @@
+
 document.addEventListener('DOMContentLoaded', function(){
     const details_button = document.querySelectorAll('.details_button');
     const table_contents = document.getElementById('top_container');
     const details_preview_contents = document.getElementById('details_preview');
     const return_review_list = document.getElementById('return_review_list');
-
+    
     const kanji = document.getElementById('kanji');
     const kunyomi_roma = document.getElementById('kunyomi_roma');
     const kunyomi_ja = document.getElementById('kunyomi_ja');
     const onyomi_roma = document.getElementById('onyomi_roma');
     const onyomi_ja = document.getElementById('onyomi_ja');
-
+    
     const delete_kanji_from_review_table_button = document.getElementById('delete_kanji_from_review_table');
     const exclude_button = document.getElementById('exclude_button');
-
+    
     let current_pointed_kanjiID;
+    
+    var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+            }
+        }
+    });
+    
     const display_kanji_details = async(value) =>{
         console.log(value)
         data = await get_kanji_details_from_id(value);
@@ -40,6 +51,9 @@ document.addEventListener('DOMContentLoaded', function(){
                 data: JSON.stringify(data),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
+                // headers: {
+                //     'X-CSRFToken': $('meta[name=csrf-token]').attr('content')
+                // },
                 success: function (response) {
                     resolve(response);
                 },
@@ -71,6 +85,9 @@ document.addEventListener('DOMContentLoaded', function(){
                 data: JSON.stringify(data),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
+                // headers: {
+                //     'X-CSRFToken': $('meta[name=csrf-token]').attr('content')
+                // },
                 success: function (response) {
                     resolve(response);
                     location.reload();
@@ -96,6 +113,9 @@ document.addEventListener('DOMContentLoaded', function(){
                 data: JSON.stringify(send),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
+                // headers: {
+                //     'X-CSRFToken': $('meta[name=csrf-token]').attr('content')
+                // },
                 success: function (response) {
                     resolve(response);
                     location.reload();

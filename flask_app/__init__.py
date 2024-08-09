@@ -13,17 +13,18 @@ from datetime import timedelta
 db = SQLAlchemy()
 login_manager = LoginManager()
 app = Flask(__name__)
+csrf = CSRFProtect()
 app.permanent_session_lifetime = timedelta(minutes=250)
 # app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['SECRET_KEY'] = config.Config.SECRET_KEY
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlite.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = config.Config.SQLITE_DB_URL
-# csrf = CSRFProtect(app) #csrf_tokenがsession毎に自動で生成される
 
 
 def create_app():
 
     db.init_app(app)
+    csrf.init_app(app)
 
     with app.app_context(): #アプリケーションコンテキスト
         db.create_all()

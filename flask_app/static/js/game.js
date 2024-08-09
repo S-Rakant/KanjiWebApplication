@@ -35,6 +35,16 @@ let selected_game_mode = ''; //game_modeを保存しておく
 let AMOUNT_PROBLEM = 0;
 let correct_answer_kanji_id_for_review_mode = []
 
+var csrf_token = $('meta[name="csrf-token"]').attr('content');
+
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrf_token);
+        }
+    }
+});
+
 
 
 const game = async() => {
@@ -297,35 +307,34 @@ const show_result = async(whether_null) => {
         result_container.classList.remove('hidden');
         game_container.classList.add('hidden');
         if(selected_game_mode == 'quiz'){
-            try{
-                let data = {
-                    'score' : correct_rate
-                }
-                console.log(JSON.stringify(data))
-                /**
-                 * flask-WTFを使用し、CSRF対策を行う場合,
-                 * AjaxのPOSTリクエストにCSRFトークンを含める必要がある.
-                 * トークンがないと400エラーとなる
-                 */
-                $.ajax({
-                    type: "POST",
-                    url: "manage/regist_ranking",
-                    data: JSON.stringify(data),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        console.log('return into ajax from regist_ranking', response);
-                    },
-                    error: function (xhr, status, error) {
-                        window.alert('Your session was expired! Please reload and login again');
-                        console.log('regist_ranking_Error', error);
-                        console.log('XHR:', xhr);
-                        console.log('Status:', status)
-                    }
-                });
-            }catch(error){
-                    console.log('regist_ranking_Error', error)
+            let data = {
+                'score' : correct_rate
             }
+            console.log(JSON.stringify(data))
+            /**
+             * flask-WTFを使用し、CSRF対策を行う場合,
+             * AjaxのPOSTリクエストにCSRFトークンを含める必要がある.
+             * トークンがないと400エラーとなる
+             */
+            $.ajax({
+                type: "POST",
+                url: "manage/regist_ranking",
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                // headers: {
+                //     'X-CSRFToken': $('meta[name=csrf-token]').attr('content')
+                // },
+                success: function (response) {
+                    console.log('return into ajax from regist_ranking', response);
+                },
+                error: function (xhr, status, error) {
+                    window.alert('Your session was expired! Please reload and login again');
+                    console.log('regist_ranking_Error', error);
+                    console.log('XHR:', xhr);
+                    console.log('Status:', status)
+                }
+            });
             //review_tableを更新
             update_review_table();
         }
@@ -333,16 +342,16 @@ const show_result = async(whether_null) => {
             console.log('answer_kanji_id_list_for_review = ' + correct_answer_kanji_id_for_review_mode)
             $.ajax({
                 type: "POST",
-                url: "func/delete_checked_kanji_from_review_table",
+                url: "manage/delete_correct_answer_kanji_from_review_table",
                 data: JSON.stringify(correct_answer_kanji_id_for_review_mode),
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
-                    console.log('delete_checked_kanji_from_review_table successfully', response);
+                    console.log('delete_correct_answer_kanji_from_review_table', response);
                 },
                 error: function (xhr, status, error) {
                     window.alert('Your session was expired! Please reload and login again');
-                    console.log('delete_checked_kanji_from_review_table_Error', error);
+                    console.log('delete_correct_answer_kanji_from_review_table_Error', error);
                     console.log('XHR:', xhr);
                     console.log('Status:', status)
                 }
@@ -366,6 +375,9 @@ const update_review_table = () => {
             data: JSON.stringify(miss_kanji_id_arr),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
+            // headers: {
+            //     'X-CSRFToken': $('meta[name=csrf-token]').attr('content')
+            // },
             error: function (xhr, status, error) {
                 window.alert('Your session was expired! Please reload and login again');
                 console.log('regist_mistake_kanjiID_Error', error);

@@ -8,10 +8,10 @@ import sqlalchemy
 # from dotenv import load_dotenv
 import ast
 from .myLogger import getLogger
-from . import config
+from .local_config import LocalConfig
 
-# load_dotenv()
-url = config.Config.SQLITE_DB_URL
+
+url = LocalConfig.SQLALCHEMY_DATABASE_URI
 
 manage = Blueprint('manage', __name__, url_prefix='/manage')
 

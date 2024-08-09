@@ -7,4 +7,4 @@
 /db_operation.py
 /generate_key.py
 /goolab_hiragana_appID.txt
-/flask_app/config.py
+/flask_app/local_config.py

@@ -11,13 +11,13 @@ from .models import Kanji, Review, Kanji_ID_Session, Review_KanjiID_Session
 import ast
 import random
 from .myLogger import getLogger
-from . import config
+from .local_config import LocalConfig
 
 from flask_wtf.csrf import CSRFError
 
 
 # load_dotenv()
-url = config.Config.SQLITE_DB_URL
+url = LocalConfig.SQLALCHEMY_DATABASE_URI
 
 func = Blueprint('func', __name__, url_prefix='/func')
 

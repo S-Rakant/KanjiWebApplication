@@ -14,14 +14,13 @@ import random
 import os
 import ast
 from .myLogger import set_logger, getLogger
-from . import config
+from .local_config import LocalConfig
 
 
 from .models import Review, Kanji
 
-# load_dotenv()
-url = config.Config.SQLITE_DB_URL
 
+url = LocalConfig.SQLALCHEMY_DATABASE_URI
 
 main = Blueprint('main', __name__)
 

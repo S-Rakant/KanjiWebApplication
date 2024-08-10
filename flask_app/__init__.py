@@ -5,17 +5,11 @@ from flask import current_app
 from flask_wtf.csrf import CSRFProtect
 from .local_config import LocalConfig
 from .config import Config
+from .myLogger import set_logger, getLogger
+
 
 import os
 from datetime import timedelta
-
-
-app = Flask(__name__)
-app.config.from_object(LocalConfig)
-
-db = SQLAlchemy()
-login_manager = LoginManager()
-csrf = CSRFProtect()
 
 def create_app():
 
@@ -41,3 +35,16 @@ def create_app():
     app.register_blueprint(manage_blueprint)
 
     return app
+
+app = Flask(__name__)
+app.config.from_object(Config)
+
+# set_logger()
+# logger = getLogger(__name__)
+
+db = SQLAlchemy()
+login_manager = LoginManager()
+csrf = CSRFProtect()
+
+
+create_app()

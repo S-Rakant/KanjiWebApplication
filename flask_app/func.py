@@ -17,7 +17,7 @@ from flask_wtf.csrf import CSRFError
 
 func = Blueprint('func', __name__, url_prefix='/func')
 
-logger = getLogger(__name__)
+# logger = getLogger(__name__)
 
 
 @func.route('/fetch_data_from_kanjiID_session', methods=['GET'])
@@ -41,7 +41,7 @@ def fetch_data_from_kanjiID_session():
             }
         )
     res = {'kanji_answer':kanji_answer, 'kanji_id':kanjiID_arr}
-    logger.info(f'UserName:[{current_user.username}]--**fetch_data_from_kanjiID_session**')
+    # logger.info(f'UserName:[{current_user.username}]--**fetch_data_from_kanjiID_session**')
     return jsonify(res), 200
 
 @func.route('/fetch_data_from_review_sessiom_table', methods=['GET'])
@@ -78,7 +78,7 @@ def fetch_data_from_review_session_table():
     
     review_kanji_id_list = [i for i in review_kanji_id_list if i != None]
     res = {'review_kanji_id':review_kanji_id_list, 'review_kanji_data':review_kanji_data}
-    logger.info(f'UserName:[{current_user.username}]--**fetch_data_from_review_sessiom_table**')
+    # logger.info(f'UserName:[{current_user.username}]--**fetch_data_from_review_sessiom_table**')
     return jsonify(res), 200
 
 
@@ -98,7 +98,7 @@ def review_details():
         'onyomi_roma': match_kanjiID.onyomi_roma,
         'onyomi_ja': match_kanjiID.onyomi_ja,
     }
-    logger.info(f'UserName:[{current_user.username}]--**fetch_review_details_data**')
+    # logger.info(f'UserName:[{current_user.username}]--**fetch_review_details_data**')
     return jsonify(data)
 
 @func.route('/delete_kanji_from_review_table', methods=['POST'])
@@ -116,7 +116,7 @@ def delete_kanji_from_review_table():
     miss_kanjiID_table = Review(user_id=current_user.id, review_kanjiID_json=str(string_to_list))
     db.session.add(miss_kanjiID_table)
     db.session.commit()
-    logger.info(f'UserName:[{current_user.username}]--**delete_kanji_from_review_table**')
+    # logger.info(f'UserName:[{current_user.username}]--**delete_kanji_from_review_table**')
     return jsonify({'message': 'success'}), 200
 
 @func.route('/delete_checked_kanji_from_review_table', methods=['POST'])
@@ -138,7 +138,7 @@ def delete_checked_kanji_from_review_table():
         update_missed_kanjiID = Review(user_id=current_user.id, review_kanjiID_json=str(removed_list))
         db.session.add(update_missed_kanjiID)
         db.session.commit()
-        logger.info(f'UserName:[{current_user.username}]--**delete_checked_kanji_from_review_table**')
+        # logger.info(f'UserName:[{current_user.username}]--**delete_checked_kanji_from_review_table**')
         return jsonify({'message': 'update review table'}), 200
     
 @func.route('/get_kanjiID_missed_before', methods=['GET'])
@@ -151,7 +151,7 @@ def get_kanjiID_missed_before():
     else:
         review_kanji_id_string = match_user_id.review_kanjiID_json
         string_to_list = ast.literal_eval(review_kanji_id_string)
-    logger.info(f'UserName:[{current_user.username}]--**get_kanjiID_missed_before**')
+    # logger.info(f'UserName:[{current_user.username}]--**get_kanjiID_missed_before**')
     return jsonify(string_to_list)
 
 

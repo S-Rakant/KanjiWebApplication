@@ -11,11 +11,11 @@ from .myLogger import getLogger
 from .local_config import LocalConfig
 
 
-url = LocalConfig.SQLALCHEMY_DATABASE_URI
+# url = LocalConfig.SQLALCHEMY_DATABASE_URI
 
 manage = Blueprint('manage', __name__, url_prefix='/manage')
 
-logger = getLogger(__name__)
+# logger = getLogger(__name__)
 
 @manage.route('/regist_ranking', methods=['GET', 'POST'])
 @manage.errorhandler(CSRFError)
@@ -40,7 +40,7 @@ def regist_ranking():
     db.session.add(ranking_table)
     db.session.commit()
     db.session.close()
-    logger.info(f'UserName:[{current_user.username}]--**regist_ranking - {update}**')
+    # logger.info(f'UserName:[{current_user.username}]--**regist_ranking - {update}**')
     return jsonify({'message': 'Ranking Registered Successfully'}), 200
 
 @manage.route('/regist_mistake_kanjiID', methods=['POST'])
@@ -64,7 +64,7 @@ def regist_mistake_kanjiID():
     db.session.add(miss_kanjiID_table)
     db.session.commit()
     print('regist_mistake_kanjIID = ' + str(miss_kanjiID))
-    logger.info(f'UserName:[{current_user.username}]--**regist_mistake_kanjiID**')
+    # logger.info(f'UserName:[{current_user.username}]--**regist_mistake_kanjiID**')
     return jsonify({'message': 'regist_mistake KanjiID Successfully!'}), 200
 
 @manage.route('/delete_correct_answer_kanji_from_review_table', methods=['POST'])
@@ -86,7 +86,7 @@ def delete_correct_answer_kanji_from_review_table():
         update_missed_kanjiID = Review(user_id=current_user.id, review_kanjiID_json=str(removed_list))
         db.session.add(update_missed_kanjiID)
         db.session.commit()
-        logger.info(f'UserName:[{current_user.username}]--**delete_correct_answer_kanji_from_review_table**')
+        # logger.info(f'UserName:[{current_user.username}]--**delete_correct_answer_kanji_from_review_table**')
         return jsonify({'message': 'update review table'}), 200
 
     

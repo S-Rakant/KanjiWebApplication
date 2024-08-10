@@ -1,4 +1,4 @@
-from flask_app import create_app
+# from flask_app import create_app
 from . import models
 from . import register_kanji as reg
 from . import db
@@ -20,12 +20,12 @@ from .local_config import LocalConfig
 from .models import Review, Kanji, Ranking, Kanji_ID_Session, Review_KanjiID_Session
 
 
-url = LocalConfig.SQLALCHEMY_DATABASE_URI
+# url = LocalConfig.SQLALCHEMY_DATABASE_URI
 
 main = Blueprint('main', __name__)
 
-set_logger()
-logger = getLogger(__name__)
+# set_logger()
+# logger = getLogger(__name__)
 
 @main.route('/')
 @main.errorhandler(CSRFError)
@@ -108,7 +108,7 @@ def index():
     db.session.add(review_kanjiID_session_table)
     db.session.commit()
 
-    logger.info(f'UserName:[{current_user.username}]--**Index**')
+    # logger.info(f'UserName:[{current_user.username}]--**Index**')
     return render_template(
         'index.html',
         ranking_info = ranking_data,
@@ -117,7 +117,7 @@ def index():
 @main.route('/Infomation')
 @main.errorhandler(CSRFError)
 def infomation():
-    logger.info(f'UserName:[{current_user.username}]--**Infomation**')
+    # logger.info(f'UserName:[{current_user.username}]--**Infomation**')
     return render_template(
         'infomation.html'
     )
@@ -125,7 +125,7 @@ def infomation():
 @main.route('/Support')
 @main.errorhandler(CSRFError)
 def support():
-    logger.info(f'UserName:[{current_user.username}]--**Support**')
+    # logger.info(f'UserName:[{current_user.username}]--**Support**')
     return render_template(
         'support.html'
     )
@@ -150,7 +150,7 @@ def review():
                 'onyomi_roma': match_id_kanji.onyomi_roma,
                 'onyomi_ja': match_id_kanji.onyomi_ja,
                 })
-    logger.info(f'UserName:[{current_user.username}]--**Review_List**')
+    # logger.info(f'UserName:[{current_user.username}]--**Review_List**')
     return render_template(
         'review.html',
         miss_kanji_data=miss_kanji_data,

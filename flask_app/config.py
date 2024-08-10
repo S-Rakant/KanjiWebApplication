@@ -13,7 +13,7 @@ class Config:
         SECRET_KEY = os.getenv('SECRET_KEY')
 
         # sqlalchemy設定
-        SQLALCHEMY_DATABASE_URI = 'mysql://{user}:{password}@{host}/{db_name}'.format(**{
+        SQLALCHEMY_DATABASE_URI = 'mysql://{user}:{password}@{host}/{db_name}?charset=utf8'.format(**{
             'user': os.getenv('DB_USER'),
             'password': os.getenv('DB_PASSWORD'),
             'host': os.getenv('DB_HOST'),
@@ -28,4 +28,4 @@ class Config:
         PERMANENT_SESSION_LIFETIME = timedelta(minutes=60)
         SQLALCHEMY_TRACK_MODIFICATIONS = False
         SQLALCHEMY_ECHO = False
-print(Config.SQLALCHEMY_DATABASE_URI)
+# print(Config.SQLALCHEMY_DATABASE_URI)

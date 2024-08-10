@@ -10,7 +10,7 @@ class Config:
 
     if not DEBUG:
         # SECRET_KEY設定
-        SECRET_KEY = os.getenv['SECRET_KEY']
+        SECRET_KEY = os.getenv('SECRET_KEY')
 
         # sqlalchemy設定
         SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{user}:{password}@{host}/{db_name}?charset=utf8'.format(**{

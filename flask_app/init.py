@@ -13,13 +13,13 @@ from datetime import timedelta
 
 def create_app():
 
-    db.init_app(app)
-    csrf.init_app(app)
+    # db.init_app(app)
+    # csrf.init_app(app)
 
-    with app.app_context(): #アプリケーションコンテキスト
-        db.create_all()
+    # with app.app_context(): #アプリケーションコンテキスト
+    #     db.create_all()
 
-    login_manager.init_app(app)
+    # login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
 
     from .main import main as main_blueprint
@@ -34,16 +34,17 @@ def create_app():
     from .manage import manage as manage_blueprint
     app.register_blueprint(manage_blueprint)
 
-    return app
-
 app = Flask(__name__)
 app.config.from_object(Config)
 
 # set_logger()
 # logger = getLogger(__name__)
 
-db = SQLAlchemy()
-login_manager = LoginManager()
-csrf = CSRFProtect()
+db = SQLAlchemy(app)
+login_manager = LoginManager(app)
+csrf = CSRFProtect(app)
+
+with app.app_context(): #アプリケーションコンテキスト
+    db.create_all()
 
 create_app()

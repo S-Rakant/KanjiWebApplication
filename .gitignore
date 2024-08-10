@@ -8,3 +8,4 @@
 /generate_key.py
 /goolab_hiragana_appID.txt
 /flask_app/local_config.py
+/sqlite3-to-mysql.py

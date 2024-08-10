@@ -1,16 +1,15 @@
-import models
-from init import db
+from .init import db
 
 from flask import Blueprint, jsonify, abort, session, request
 from flask_login import current_user, login_required
 from sqlalchemy import MetaData, Table
 import sqlalchemy
 import os
-from models import Kanji, Review, Kanji_ID_Session, Review_KanjiID_Session
+from .models import Kanji, Review, Kanji_ID_Session, Review_KanjiID_Session
 import ast
 import random
-from myLogger import getLogger
-from local_config import LocalConfig
+from .myLogger import getLogger
+from .local_config import LocalConfig
 
 from flask_wtf.csrf import CSRFError
 

@@ -1,6 +1,3 @@
-# from flask_app import create_app
-import models
-# import register_kanji as reg
 from init import db
 
 
@@ -13,11 +10,11 @@ import sqlalchemy
 import random
 import os
 import ast
-from myLogger import set_logger, getLogger
-from local_config import LocalConfig
+from .myLogger import set_logger, getLogger
+from .local_config import LocalConfig
 
 
-from models import Review, Kanji, Ranking, Kanji_ID_Session, Review_KanjiID_Session
+from .models import Review, Kanji, Ranking, Kanji_ID_Session, Review_KanjiID_Session
 
 
 # url = LocalConfig.SQLALCHEMY_DATABASE_URI
@@ -52,7 +49,7 @@ def index():
     fin_point = 1235
     range_size = 10
     kanji_id_arr = random_kanjiID_select(st_point, fin_point, range_size)
-    kanji_id_session = models.Kanji_ID_Session(
+    kanji_id_session = Kanji_ID_Session(
         user_id = current_user.id,
         kanji_data0 = kanji_id_arr[0],
         kanji_data1 = kanji_id_arr[1],

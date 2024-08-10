@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from flask import current_app
 from flask_wtf.csrf import CSRFProtect
-from local_config import LocalConfig
+# from local_config import LocalConfig
 from config import Config
 from myLogger import set_logger, getLogger
 

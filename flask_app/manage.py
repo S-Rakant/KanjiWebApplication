@@ -3,6 +3,7 @@ from flask_login import current_user, login_required
 from flask_wtf.csrf import CSRFError
 from .models import Ranking, Review
 from datetime import datetime
+from . import db
 
 import sqlalchemy
 # from dotenv import load_dotenv
@@ -27,37 +28,45 @@ def regist_ranking():
     update = 'none update'
     if(not current_user.is_authenticated):
         return jsonify({'message': 'Session was expired!'}), 400
-    engine = sqlalchemy.create_engine(url, echo=False)
-    Session = sqlalchemy.orm.sessionmaker(bind=engine)
-    session = Session()
+    # engine = sqlalchemy.create_engine(
+    #     url,
+    #     pool_size=10,
+    #     max_overflow=0,
+    #     echo=False)
+    # Session = sqlalchemy.orm.sessionmaker(bind=engine)
+    # session = Session()
     data = request.get_json()
 
-    match_id = session.query(Ranking).get(current_user.id)
+    match_id = Ranking.query.get(current_user.id)
     if(match_id == None):
         pass
     elif(data.get('score') >= match_id.score):
         update = 'update'
-        session.delete(match_id)
+        db.session.delete(match_id)
     else:
         return jsonify({'message': 'Ranking Registered Successfully'}), 200
     
     playtime = datetime.now()
     formatted_time = playtime.strftime('%Y-%m-%d %H:%M:%S') #usernameがuniqueな値(primary key)のため、登録時にエラー
     ranking_table = Ranking(user_id=current_user.id, username=current_user.username, score=data.get('score'), playtime=formatted_time)
-    session.add(ranking_table)
-    session.commit()
-    session.close()
+    db.session.add(ranking_table)
+    db.session.commit()
+    db.session.close()
     logger.info(f'UserName:[{current_user.username}]--**regist_ranking - {update}**')
     return jsonify({'message': 'Ranking Registered Successfully'}), 200
 
 @manage.route('/regist_mistake_kanjiID', methods=['POST'])
 @manage.errorhandler(CSRFError)
 def regist_mistake_kanjiID():
-    engine = sqlalchemy.create_engine(url, echo=False)
-    Session = sqlalchemy.orm.sessionmaker(bind=engine)
-    session = Session()
+    # engine = sqlalchemy.create_engine(
+    #     url,
+    #     pool_size=10,
+    #     max_overflow=0,
+    #     echo=False)
+    # Session = sqlalchemy.orm.sessionmaker(bind=engine)
+    # session = Session()
     miss_kanjiID = request.get_json()
-    match_id = session.query(Review).get(current_user.id)
+    match_id = Review.query.get(current_user.id)
     review_kanjiID = []
     if(match_id == None):
         review_kanjiID = miss_kanjiID #list
@@ -69,11 +78,11 @@ def regist_mistake_kanjiID():
         temp = list(miss_kanjiID)+list(miss_kanji_fromDB_list) #list
         review_kanjiID_set = set(temp) #set
         review_kanjiID = list(review_kanjiID_set)
-        session.delete(match_id)
+        db.session.delete(match_id)
     miss_kanjiID_table = Review(user_id=current_user.id, review_kanjiID_json=str(review_kanjiID))
-    session.add(miss_kanjiID_table)
-    session.commit()
-    session.close()
+    db.session.add(miss_kanjiID_table)
+    db.session.commit()
+    # db.session.close()
     print('regist_mistake_kanjIID = ' + str(miss_kanjiID))
     logger.info(f'UserName:[{current_user.username}]--**regist_mistake_kanjiID**')
     return jsonify({'message': 'regist_mistake KanjiID Successfully!'}), 200
@@ -82,10 +91,14 @@ def regist_mistake_kanjiID():
 @manage.errorhandler(CSRFError)
 @login_required
 def delete_correct_answer_kanji_from_review_table():
-    engine = sqlalchemy.create_engine(url, echo=False)
-    Session = sqlalchemy.orm.sessionmaker(bind=engine)
-    session = Session()
-    match_uer_id = session.query(Review).get(current_user.id)
+    # engine = sqlalchemy.create_engine(
+    #     url,
+    #     pool_size=10,
+    #     max_overflow=0,
+    #     echo=False)
+    # Session = sqlalchemy.orm.sessionmaker(bind=engine)
+    # session = Session()
+    match_uer_id = Review.query.get(current_user.id)
     checked_kanjiID_list = request.get_json()
     if(checked_kanjiID_list == []):
         return jsonify({'message': 'no checked kanji'}), 200
@@ -99,11 +112,11 @@ def delete_correct_answer_kanji_from_review_table():
         print(f'checked_kanjiID_list = {to_int_checked_kanji_list}')
         removed_list = [item for item in string_to_user_review_kanji_list if item not in to_int_checked_kanji_list]
         print(removed_list)
-        session.delete(match_uer_id)
+        db.session.delete(match_uer_id)
         update_missed_kanjiID = Review(user_id=current_user.id, review_kanjiID_json=str(removed_list))
-        session.add(update_missed_kanjiID)
-        session.commit()
-        session.close()
+        db.session.add(update_missed_kanjiID)
+        db.session.commit()
+        # db.session.close()
         logger.info(f'UserName:[{current_user.username}]--**delete_correct_answer_kanji_from_review_table**')
         return jsonify({'message': 'update review table'}), 200
 

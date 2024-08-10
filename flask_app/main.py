@@ -1,6 +1,7 @@
 from flask_app import create_app
 from . import models
 from . import register_kanji as reg
+from . import db
 
 
 from flask import render_template, request, abort
@@ -17,7 +18,7 @@ from .myLogger import set_logger, getLogger
 from .local_config import LocalConfig
 
 
-from .models import Review, Kanji
+from .models import Review, Kanji, Ranking, Kanji_ID_Session, Review_KanjiID_Session
 
 
 url = LocalConfig.SQLALCHEMY_DATABASE_URI
@@ -31,12 +32,16 @@ logger = getLogger(__name__)
 @main.errorhandler(CSRFError)
 @login_required
 def index():
-    engine = sqlalchemy.create_engine(url, echo=False)
-    Session = sqlalchemy.orm.sessionmaker(bind=engine)
-    session = Session()
+    # engine = sqlalchemy.create_engine(
+    #     url,
+    #     pool_size=10,
+    #     max_overflow=0,
+    #     echo=False)
+    # Session = sqlalchemy.orm.sessionmaker(bind=engine)
+    # session = Session()
 
     #10位までのuserのスコアを取得
-    ranking_infomations = models.Ranking.query.order_by(desc(models.Ranking.score)).limit(10)
+    ranking_infomations = Ranking.query.order_by(desc(Ranking.score)).limit(10)
 
     rank = 1
     ranking_data = []
@@ -47,9 +52,9 @@ def index():
         rank += 1
 
     
-    select = session.query(models.Kanji_ID_Session).get(current_user.id)
+    select = Kanji_ID_Session.query.get(current_user.id)
     if(select != None):
-        session.delete(select)
+        db.session.delete(select)
 
     #create kanjiID session for quiz
     st_point = 0
@@ -69,20 +74,20 @@ def index():
         kanji_data8 = kanji_id_arr[8],
         kanji_data9 = kanji_id_arr[9],
         )
-    session.add(kanji_id_session)
-    session.commit()
+    db.session.add(kanji_id_session)
+    db.session.commit()
 
     #create kanjiID session for review
     selected_review_kanjiID = []
     review_kanji_id_list = []
-    match_id_review_table = session.query(models.Review).get(current_user.id)
+    match_id_review_table = Review.query.get(current_user.id)
     if(not match_id_review_table == None):
         review_kanji_id_string = match_id_review_table.review_kanjiID_json
         review_kanji_id_list = ast.literal_eval(review_kanji_id_string)
     else:
-        review_table = models.Review(user_id = current_user.id, review_kanjiID_json = '[]')
-        session.add(review_table)
-        session.commit()
+        review_table = Review(user_id = current_user.id, review_kanjiID_json = '[]')
+        db.session.add(review_table)
+        db.session.commit()
 
     for i in range(0, 10): #最大で10個idを格納,10よりも少ない場合は空いた場所にNoneを格納
         if(len(review_kanji_id_list) > 0):
@@ -92,11 +97,11 @@ def index():
         else:
             selected_review_kanjiID.append(None)
 
-    match_id_review_kanjiID_session = session.query(models.Review_KanjiID_Session).get(current_user.id)
+    match_id_review_kanjiID_session = Review_KanjiID_Session.query.get(current_user.id)
     if(not match_id_review_kanjiID_session == None):
-        session.delete(match_id_review_kanjiID_session)
+        db.session.delete(match_id_review_kanjiID_session)
 
-    review_kanjiID_session_table = models.Review_KanjiID_Session(
+    review_kanjiID_session_table = Review_KanjiID_Session(
         user_id = current_user.id,
         kanji_data0 = selected_review_kanjiID[0],
         kanji_data1 = selected_review_kanjiID[1],
@@ -109,9 +114,9 @@ def index():
         kanji_data8 = selected_review_kanjiID[8],
         kanji_data9 = selected_review_kanjiID[9],
     )
-    session.add(review_kanjiID_session_table)
-    session.commit()
-    session.close()
+    db.session.add(review_kanjiID_session_table)
+    db.session.commit()
+    # db.session.close()
 
     logger.info(f'UserName:[{current_user.username}]--**Index**')
     return render_template(
@@ -139,17 +144,21 @@ def support():
 @main.errorhandler(CSRFError)
 @login_required
 def review():
-    engine = sqlalchemy.create_engine(url, echo=False)
-    Session = sqlalchemy.orm.sessionmaker(bind=engine)
-    session = Session()
-    match_id_review = session.query(Review).get(current_user.id)
+    # engine = sqlalchemy.create_engine(
+    #     url,
+    #     pool_size=10,
+    #     max_overflow=0,
+    #     echo=False)
+    # Session = sqlalchemy.orm.sessionmaker(bind=engine)
+    # session = Session()
+    match_id_review = Review.query.get(current_user.id)
     miss_kanji_data = []
     if(match_id_review != None):
         miss_kanji_fromDB_list = ast.literal_eval(match_id_review.review_kanjiID_json)
         #間違えた漢字IDの「漢字の詳細」を辞書形式でmiss_kanji_dataに格納
         #render_templateの引数に指定
         for kanji_id in miss_kanji_fromDB_list:
-            match_id_kanji = session.query(Kanji).get(kanji_id)
+            match_id_kanji = Kanji.query.get(kanji_id)
             miss_kanji_data.append({
                 'kanji_id': match_id_kanji.kanji_id,
                 'kanji': match_id_kanji.kanji,

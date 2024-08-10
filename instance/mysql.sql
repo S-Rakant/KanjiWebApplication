@@ -1,8 +1,8 @@
 SET sql_mode='NO_BACKSLASH_ESCAPES';
 CREATE TABLE user (
-	id INT NOT NULL, 
+	id INTEGER NOT NULL, 
 	username VARCHAR(150) NOT NULL, 
-	password_hash VARCHAR(128), 
+	password_hash VARCHAR(256), 
 	PRIMARY KEY (id), 
 	UNIQUE (username)
 );
@@ -16,10 +16,10 @@ INSERT INTO user VALUES(7,'KingKazuma','scrypt:32768:8:1$qdbgzii6s91cjcxI$73f01c
 INSERT INTO user VALUES(8,'test_user1','scrypt:32768:8:1$a2UJqMpMWJD7m06g$d6ee25bfb0a445710ba628fa989f397734260e6c4f1b14be13d2c247ddda59f8487b95b497bcb2bc5eddc3c872db43917973ed08f4f325cdfedf93c5888326e4');
 INSERT INTO user VALUES(9,'test_user2','scrypt:32768:8:1$A2Ahn3Jo4MS5GCEu$2fc233d0f6166d60f9f5acbd6f951681a9861b35c5f03fee06329d8333a534aa618312973951992667e2b49ba09f42e7acb62c4bdeb6ae1436153c560f73c111');
 CREATE TABLE ranking (
-	user_id INT NOT NULL, 
-	username VARCHAR(50) NOT NULL, 
-	score INT NOT NULL, 
-	playtime VARCHAR(100) NOT NULL, 
+	user_id INTEGER NOT NULL, 
+	username VARCHAR NOT NULL, 
+	score INTEGER NOT NULL, 
+	playtime VARCHAR NOT NULL, 
 	PRIMARY KEY (user_id)
 );
 INSERT INTO ranking VALUES(1,'sousuke0416',100,'2024-07-30 02:46:28');
@@ -31,12 +31,12 @@ INSERT INTO ranking VALUES(6,'shingo',80,'2024-07-12 21:27:26');
 INSERT INTO ranking VALUES(7,'KingKazuma',100,'2024-08-07 16:02:55');
 INSERT INTO ranking VALUES(9,'test_user2',10,'2024-08-09 13:25:14');
 CREATE TABLE all_kanji (
-	kanji_id INT NOT NULL, 
-	kanji VARCHAR(128), 
-	kunyomi_roma VARCHAR(1024), 
-	kunyomi_ja VARCHAR(1024), 
-	onyomi_roma VARCHAR(1024), 
-	onyomi_ja VARCHAR(1024), 
+	kanji_id INTEGER NOT NULL, 
+	kanji VARCHAR, 
+	kunyomi_roma VARCHAR, 
+	kunyomi_ja VARCHAR, 
+	onyomi_roma VARCHAR, 
+	onyomi_ja VARCHAR, 
 	PRIMARY KEY (kanji_id)
 );
 INSERT INTO all_kanji VALUES(1,'一','hito','ひと','ichi','イチ');
@@ -1275,17 +1275,17 @@ INSERT INTO all_kanji VALUES(1233,'師','n/a','','shi','シ');
 INSERT INTO all_kanji VALUES(1234,'枝','eda','えだ','shi','シ');
 INSERT INTO all_kanji VALUES(1235,'資','n/a','','shi','シ');
 CREATE TABLE IF NOT EXISTS `kanjiID_session` (
-	user_id INT NOT NULL, 
-	kanji_data0 INT NOT NULL, 
-	kanji_data1 INT NOT NULL, 
-	kanji_data2 INT NOT NULL, 
-	kanji_data3 INT NOT NULL, 
-	kanji_data4 INT NOT NULL, 
-	kanji_data5 INT NOT NULL, 
-	kanji_data6 INT NOT NULL, 
-	kanji_data7 INT NOT NULL, 
-	kanji_data8 INT NOT NULL, 
-	kanji_data9 INT NOT NULL, 
+	user_id INTEGER NOT NULL, 
+	kanji_data0 INTEGER NOT NULL, 
+	kanji_data1 INTEGER NOT NULL, 
+	kanji_data2 INTEGER NOT NULL, 
+	kanji_data3 INTEGER NOT NULL, 
+	kanji_data4 INTEGER NOT NULL, 
+	kanji_data5 INTEGER NOT NULL, 
+	kanji_data6 INTEGER NOT NULL, 
+	kanji_data7 INTEGER NOT NULL, 
+	kanji_data8 INTEGER NOT NULL, 
+	kanji_data9 INTEGER NOT NULL, 
 	PRIMARY KEY (user_id)
 );
 INSERT INTO kanjiID_session VALUES(1,285,41,147,1167,356,1018,89,288,317,223);
@@ -1295,8 +1295,8 @@ INSERT INTO kanjiID_session VALUES(6,435,140,1081,102,733,605,110,55,7,695);
 INSERT INTO kanjiID_session VALUES(7,758,955,818,1089,568,785,265,148,1205,702);
 INSERT INTO kanjiID_session VALUES(9,1138,523,1078,1152,58,1039,614,1155,1076,799);
 CREATE TABLE review_table (
-	user_id INT NOT NULL, 
-	`review_kanjiID_json` VARCHAR(4096), 
+	user_id INTEGER NOT NULL, 
+	`review_kanjiID_json` VARCHAR, 
 	PRIMARY KEY (user_id)
 );
 INSERT INTO review_table VALUES(1,'[819, 468, 213, 340]');
@@ -1306,17 +1306,17 @@ INSERT INTO review_table VALUES(6,'[]');
 INSERT INTO review_table VALUES(7,'[256, 233, 714, 747, 784, 919, 1110, 1207, 667]');
 INSERT INTO review_table VALUES(9,'[181, 120]');
 CREATE TABLE IF NOT EXISTS `review_kanjiID_session` (
-	user_id INT NOT NULL, 
-	kanji_data0 INT, 
-	kanji_data1 INT, 
-	kanji_data2 INT, 
-	kanji_data3 INT, 
-	kanji_data4 INT, 
-	kanji_data5 INT, 
-	kanji_data6 INT, 
-	kanji_data7 INT, 
-	kanji_data8 INT, 
-	kanji_data9 INT, 
+	user_id INTEGER NOT NULL, 
+	kanji_data0 INTEGER, 
+	kanji_data1 INTEGER, 
+	kanji_data2 INTEGER, 
+	kanji_data3 INTEGER, 
+	kanji_data4 INTEGER, 
+	kanji_data5 INTEGER, 
+	kanji_data6 INTEGER, 
+	kanji_data7 INTEGER, 
+	kanji_data8 INTEGER, 
+	kanji_data9 INTEGER, 
 	PRIMARY KEY (user_id)
 );
 INSERT INTO review_kanjiID_session VALUES(1,819,468,213,340,NULL,NULL,NULL,NULL,NULL,NULL);

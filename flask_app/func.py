@@ -5,7 +5,6 @@ from flask import Blueprint, jsonify, abort, session, request
 from flask_login import current_user, login_required
 from sqlalchemy import MetaData, Table
 import sqlalchemy
-# from dotenv import load_dotenv
 import os
 from .models import Kanji, Review, Kanji_ID_Session, Review_KanjiID_Session
 import ast
@@ -15,9 +14,6 @@ from .local_config import LocalConfig
 
 from flask_wtf.csrf import CSRFError
 
-
-# load_dotenv()
-url = LocalConfig.SQLALCHEMY_DATABASE_URI
 
 func = Blueprint('func', __name__, url_prefix='/func')
 
@@ -30,20 +26,10 @@ def fetch_data_from_kanjiID_session():
     #sessionが切れていたらloginを促す
     if(not current_user.is_authenticated):
         return jsonify({'message': 'Session was expired!'}), 400
-    # engine = sqlalchemy.create_engine(
-    #     url,
-    #     pool_size=10,
-    #     max_overflow=0,
-    #     echo=False)
-    # Session = sqlalchemy.orm.sessionmaker(bind=engine)
-    # session = Session()
     kanjiID = Kanji_ID_Session.query.get(current_user.id)
-    # kanjiID = session.query(Kanji_ID_Session).get(current_user.id)
     kanjiID_arr = set_kanji_id(kanjiID)
     kanji_answer = []
     for id in kanjiID_arr:
-        #kanjiID_sessionのkanjiIDと一致する漢字をall_kanjiから取得
-        # kanji_data = session.query(Kanji).get(id)
         kanji_data = Kanji.query.get(id)
         kanji_answer.append(
             {
@@ -64,13 +50,6 @@ def fetch_data_from_review_session_table():
     #sessionが切れていたらloginを促す
     if(not current_user.is_authenticated):
         return jsonify({'message': 'Session was expired!'}), 400
-    # engine = sqlalchemy.create_engine(
-    #     url,
-    #     pool_size=10,
-    #     max_overflow=0,
-    #     echo=False)
-    # Session = sqlalchemy.orm.sessionmaker(bind=engine)
-    # session = Session()
     match_id = Review_KanjiID_Session.query.get(current_user.id)
     review_kanji_id_list = [
         match_id.kanji_data0,
@@ -97,11 +76,7 @@ def fetch_data_from_review_session_table():
             }
             review_kanji_data.append(temp)
     
-    # review_kanji_id_list.append(match_id.kanji_data0)
-    # print(f'review_kanji_data = {review_kanji_data}')
-    # print(f'review_kanji_session_arr = {review_kanji_id_list}')
     review_kanji_id_list = [i for i in review_kanji_id_list if i != None]
-    print(f'review_kanji_id_list = {review_kanji_id_list}')
     res = {'review_kanji_id':review_kanji_id_list, 'review_kanji_data':review_kanji_data}
     logger.info(f'UserName:[{current_user.username}]--**fetch_data_from_review_sessiom_table**')
     return jsonify(res), 200
@@ -114,14 +89,6 @@ def fetch_data_from_review_session_table():
 def review_details():
     data = request.get_json()
     id = data.get('id')
-    print(id)
-    # engine = sqlalchemy.create_engine(
-    #     url,
-    #     pool_size=10,
-    #     max_overflow=0,
-    #     echo=False)
-    # Session = sqlalchemy.orm.sessionmaker(bind=engine)
-    # session = Session()
     match_kanjiID = Kanji.query.get(id)
     data = {
         'kanji_id': match_kanjiID.kanji_id,
@@ -138,30 +105,17 @@ def review_details():
 @func.errorhandler(CSRFError)
 @login_required
 def delete_kanji_from_review_table():
-    # engine = sqlalchemy.create_engine(
-    #     url,
-    #     pool_size=10,
-    #     max_overflow=0,
-    #     echo=False)
-    # Session = sqlalchemy.orm.sessionmaker(bind=engine)
-    # session = Session()
     data = request.get_json()
     kanji_id = int(data.get('id'))
     match_user_id = Review.query.get(current_user.id)
     review_kanji_id_string = match_user_id.review_kanjiID_json
     string_to_list = ast.literal_eval(review_kanji_id_string)
-
-    print(f'string_to_list = {string_to_list}')
-    # print(f'kanji_id_type = {type(kanji_id)}')
     string_to_list.remove(kanji_id)
-    print(f'delete_user_select_kanji_list = {string_to_list}')
-    # print(f'kanji_id = {type(kanji_id)}')
     
     db.session.delete(match_user_id)
     miss_kanjiID_table = Review(user_id=current_user.id, review_kanjiID_json=str(string_to_list))
     db.session.add(miss_kanjiID_table)
     db.session.commit()
-    # db.session.close()
     logger.info(f'UserName:[{current_user.username}]--**delete_kanji_from_review_table**')
     return jsonify({'message': 'success'}), 200
 
@@ -169,13 +123,6 @@ def delete_kanji_from_review_table():
 @func.errorhandler(CSRFError)
 @login_required
 def delete_checked_kanji_from_review_table():
-    # engine = sqlalchemy.create_engine(
-    #     url,
-    #     pool_size=10,
-    #     max_overflow=0,
-    #     echo=False)
-    # Session = sqlalchemy.orm.sessionmaker(bind=engine)
-    # session = Session()
     match_uer_id = Review.query.get(current_user.id)
     checked_kanjiID_list = request.get_json()
     if(checked_kanjiID_list == []):
@@ -183,18 +130,14 @@ def delete_checked_kanji_from_review_table():
     else:
         user_review_kanji_list = match_uer_id.review_kanjiID_json
         string_to_user_review_kanji_list = ast.literal_eval(user_review_kanji_list)
-        print(f'string_to_user_review_list = {string_to_user_review_kanji_list}')
         to_int_checked_kanji_list = []
         for item in checked_kanjiID_list:
             to_int_checked_kanji_list.append(int(item))
-        print(f'checked_kanjiID_list = {to_int_checked_kanji_list}')
         removed_list = [item for item in string_to_user_review_kanji_list if item not in to_int_checked_kanji_list]
-        print(removed_list)
         db.session.delete(match_uer_id)
         update_missed_kanjiID = Review(user_id=current_user.id, review_kanjiID_json=str(removed_list))
         db.session.add(update_missed_kanjiID)
         db.session.commit()
-        # db.session.close()
         logger.info(f'UserName:[{current_user.username}]--**delete_checked_kanji_from_review_table**')
         return jsonify({'message': 'update review table'}), 200
     
@@ -202,13 +145,6 @@ def delete_checked_kanji_from_review_table():
 @func.errorhandler(CSRFError)
 @login_required
 def get_kanjiID_missed_before():
-    # engine = sqlalchemy.create_engine(
-    #     url,
-    #     pool_size=10,
-    #     max_overflow=0,
-    #     echo=False)
-    # Session = sqlalchemy.orm.sessionmaker(bind=engine)
-    # session = Session()
     match_user_id = Review.query.get(current_user.id)
     if(match_user_id == None):
         string_to_list = []

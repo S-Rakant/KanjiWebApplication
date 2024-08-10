@@ -2,7 +2,6 @@ from flask import Flask, session, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from flask import current_app
-# from dotenv import load_dotenv
 from flask_wtf.csrf import CSRFProtect
 from .local_config import LocalConfig
 from .config import Config
@@ -17,12 +16,6 @@ app.config.from_object(LocalConfig)
 db = SQLAlchemy()
 login_manager = LoginManager()
 csrf = CSRFProtect()
-# app.permanent_session_lifetime = timedelta(minutes=250)
-# app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
-# app.config['SECRET_KEY'] = config.Config.SECRET_KEY
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlite.db'
-# app.config['SQLALCHEMY_DATABASE_URI'] = config.Config.SQLITE_DB_URL
-
 
 def create_app():
 

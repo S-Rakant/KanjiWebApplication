@@ -17,4 +17,4 @@ class LocalConfig:
         'host': os.getenv('DB_HOST'),
         'db_name': os.getenv('DB_NAME'),
     })
-    PERMANENT_SESSION_LIFETIME = timedelta(minutes=180)
+    PERMANENT_SESSION_LIFETIME = timedelta(minutes=60)

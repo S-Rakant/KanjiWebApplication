@@ -5,10 +5,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from . import db
 
-###########TO DO############
-#データベースをdb.spliteに統合<---次回はここから
-#SQLAlchemyの実装
-############################
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key = True)
@@ -73,69 +69,3 @@ class Review_KanjiID_Session(db.Model):
     kanji_data7 = db.Column(db.Integer, nullable = True)
     kanji_data8 = db.Column(db.Integer, nullable = True)
     kanji_data9 = db.Column(db.Integer, nullable = True)
-
-
-
-
-
-
-
-# SCORE_DATABASE = 'score_info.db'
-
-# def create_score_table():
-#     con = sqlite3.connect(SCORE_DATABASE)
-#     con.execute("CREATE TABLE IF NOT EXISTS infomations (user_name, score, play_time)")
-#     con.commit()
-#     con.close()
-
-# PROB_KANJI_DATABASE = 'prob_kaji_data.db'
-
-# def create_prob_table():
-#     con = sqlite3.connect(PROB_KANJI_DATABASE)
-#     con.execute("CREATE TABLE IF NOT EXISTS prob_kanjis (kanji, kunyomi_roma, kunyomi_ja, onyomi_roma, onyomi_ja)") #kaji alive apiから取得した漢字情報をデータベースに格納
-#     con.commit()
-#     con.close()
-
-# USER_TO_SOLVE_PROB_DATABASE = 'user_to_solve_prob.db'
-
-# def create_user_to_solve_table():
-#     con = sqlite3.connect(USER_TO_SOLVE_PROB_DATABASE)
-#     con.execute("CREATE TABLE IF NOT EXISTS user_to_solve_problems (kanji, kunyomi_roma, kunyomi_ja, onyomi_roma, onyomi_ja)")
-#     con.commit()
-#     con.close()
-
-# def add_score(score):
-    # con = sqlite3.connect(SCORE_DATABASE)
-    # con.execute('INSERT INTO infomations VALUES (?, ?, ?)',
-    #             ('No Name', score, datetime.now()))
-    # con.commit()
-    # con.close()
-    
-
-# debug用
-
-# def delete_score_table():
-#     print('score_tableを削除')
-#     con = sqlite3.connect(SCORE_DATABASE)
-#     cursor = con.cursor()
-#     cursor.execute("DELETE FROM infomations;")
-#     con.commit()
-#     con.close()
-
-# def delete_prob_table():
-#     print('prob_tableを削除')
-#     con = sqlite3.connect(PROB_KANJI_DATABASE)
-#     cursor = con.cursor()
-#     cursor.execute("DELETE FROM prob_kanjis;")
-#     con.commit()
-#     con.close()
-
-
-# def delete_user_to_solve_table():
-#     print('user_to_solve_tableを削除')
-#     con = sqlite3.connect(USER_TO_SOLVE_PROB_DATABASE)
-#     cursor = con.cursor()
-#     cursor.execute("DELETE FROM user_to_solve_problems;")
-#     con.commit()
-#     con.close()
-

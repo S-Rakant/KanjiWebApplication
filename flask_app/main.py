@@ -11,7 +11,6 @@ from flask_wtf.csrf import CSRFError
 from sqlalchemy import desc
 import sqlalchemy
 import random
-# from dotenv import load_dotenv
 import os
 import ast
 from .myLogger import set_logger, getLogger
@@ -32,14 +31,6 @@ logger = getLogger(__name__)
 @main.errorhandler(CSRFError)
 @login_required
 def index():
-    # engine = sqlalchemy.create_engine(
-    #     url,
-    #     pool_size=10,
-    #     max_overflow=0,
-    #     echo=False)
-    # Session = sqlalchemy.orm.sessionmaker(bind=engine)
-    # session = Session()
-
     #10位までのuserのスコアを取得
     ranking_infomations = Ranking.query.order_by(desc(Ranking.score)).limit(10)
 
@@ -116,7 +107,6 @@ def index():
     )
     db.session.add(review_kanjiID_session_table)
     db.session.commit()
-    # db.session.close()
 
     logger.info(f'UserName:[{current_user.username}]--**Index**')
     return render_template(
@@ -144,13 +134,6 @@ def support():
 @main.errorhandler(CSRFError)
 @login_required
 def review():
-    # engine = sqlalchemy.create_engine(
-    #     url,
-    #     pool_size=10,
-    #     max_overflow=0,
-    #     echo=False)
-    # Session = sqlalchemy.orm.sessionmaker(bind=engine)
-    # session = Session()
     match_id_review = Review.query.get(current_user.id)
     miss_kanji_data = []
     if(match_id_review != None):
@@ -179,5 +162,4 @@ def random_kanjiID_select(a, b, k):
         v = random.randint(a, b)
         if (v not in result_arr):
             result_arr.append(v)
-    print(result_arr)
     return result_arr

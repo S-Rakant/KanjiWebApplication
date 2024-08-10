@@ -19,7 +19,7 @@ url = LocalConfig.SQLALCHEMY_DATABASE_URI
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id)) #user_idとマッチした行を取り出す
+    return User.query.get(int(user_id))
 
 @auth.route('/register', methods=['GET', 'POST'])
 @auth.errorhandler(CSRFError)
@@ -46,15 +46,6 @@ def login():
         if user and user.check_password(form.password.data):
             login_user(user)
             logger.info(f'############### UserID : {form.username.data} Login ###############')
-            # session["uesr_name"] = form.username.data
-            # engine = sqlalchemy.create_engine(
-            #     url,
-            #     pool_size=10,
-            #     max_overflow=0,
-            #     echo=False
-            #     )
-            # Session = sqlalchemy.orm.sessionmaker(bind=engine)
-            # session = Session()
             flash('Login successfully! Welcome to Kanji Quiz!', 'login_success')
             return redirect(url_for('main.index'))
         else:
@@ -68,6 +59,5 @@ def login():
 def logout():
     logger.info(f'############### UserID : {current_user.username} was Loggedout ###############')
     logout_user()
-    db.session.close()
     flash('Logout successfully!!', 'logout_success')
     return redirect(url_for('auth.login'))

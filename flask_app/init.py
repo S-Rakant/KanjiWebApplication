@@ -22,16 +22,16 @@ def create_app():
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
 
-    from main import main as main_blueprint
+    from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
-    from func import func as func_blueprint
+    from .func import func as func_blueprint
     app.register_blueprint(func_blueprint)
 
-    from auth import auth as auth_blueprint
+    from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
-    from manage import manage as manage_blueprint
+    from .manage import manage as manage_blueprint
     app.register_blueprint(manage_blueprint)
 
     return app
@@ -45,6 +45,5 @@ app.config.from_object(Config)
 db = SQLAlchemy()
 login_manager = LoginManager()
 csrf = CSRFProtect()
-
 
 create_app()

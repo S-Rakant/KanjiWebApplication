@@ -1,7 +1,7 @@
 # from flask_app import create_app
-from . import models
-from . import register_kanji as reg
-from . import db
+import models
+# import register_kanji as reg
+from init import db
 
 
 from flask import render_template, request, abort
@@ -13,11 +13,11 @@ import sqlalchemy
 import random
 import os
 import ast
-from .myLogger import set_logger, getLogger
-from .local_config import LocalConfig
+from myLogger import set_logger, getLogger
+from local_config import LocalConfig
 
 
-from .models import Review, Kanji, Ranking, Kanji_ID_Session, Review_KanjiID_Session
+from models import Review, Kanji, Ranking, Kanji_ID_Session, Review_KanjiID_Session
 
 
 # url = LocalConfig.SQLALCHEMY_DATABASE_URI

@@ -1,14 +1,14 @@
 from flask import Blueprint, request, jsonify
 from flask_login import current_user, login_required
 from flask_wtf.csrf import CSRFError
-from .models import Ranking, Review
+from models import Ranking, Review
 from datetime import datetime
-from . import db
+from init import db
 
 import sqlalchemy
 import ast
-from .myLogger import getLogger
-from .local_config import LocalConfig
+from myLogger import getLogger
+from local_config import LocalConfig
 
 
 # url = LocalConfig.SQLALCHEMY_DATABASE_URI

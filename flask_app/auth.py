@@ -1,17 +1,17 @@
 from flask import Blueprint, request, render_template, flash, redirect, url_for, session
 import sqlalchemy
-from . import login_manager
+from init import login_manager
 from flask_login import login_required, login_user, logout_user, current_user
 from flask import session, abort
 from flask_wtf.csrf import CSRFError
 
 
-from .forms import RegistrationForm, LoginForm 
-from .models import User
-from .local_config import LocalConfig
+from forms import RegistrationForm, LoginForm 
+from models import User
+from local_config import LocalConfig
 
-from . import db
-from .myLogger import getLogger
+from init import db
+from myLogger import getLogger
 
 auth = Blueprint('auth', __name__, url_prefix='/auth')
 # logger = getLogger(__name__)

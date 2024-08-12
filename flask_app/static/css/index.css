@@ -97,13 +97,14 @@
 
 /* Game Answer Container Styles */
 #game_answer_container {
+    align-items: center;
     text-align: center;
     margin-top: 100px;
 }
 
 .game_title {
+    align-items: center;
     margin-bottom: 20px;
-    margin-left: 260px;
 }
 
 .game_mode_answer_container {
@@ -111,8 +112,6 @@
     text-align: center;
     font-size: 30px;
     font-weight: bold;
-    margin-right: 80px;
-
 }
 
 .whether_missed_before {
@@ -278,9 +277,9 @@ div.flash_login_success {
     background-color: rgb(69, 255, 69);
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .flash p {
+}
+
+.flash p {
     width: fit-content;
     text-align: center;
-  }
+}

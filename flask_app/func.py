@@ -1,4 +1,4 @@
-from . import db
+from .init import db
 
 from flask import Blueprint, jsonify, abort, session, request
 from flask_login import current_user, login_required

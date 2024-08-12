@@ -3,7 +3,7 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-from . import db
+from .init import db
 
 class User(db.Model, UserMixin):
     __tablename__ = 'user'

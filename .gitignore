@@ -11,3 +11,4 @@
 /flask_app/log/
 /flask_app/instance/
 /sqlite3-to-mysql.py
+/test.py

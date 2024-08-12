@@ -1,4 +1,4 @@
-from .init import db
+from . import db
 
 
 from flask import render_template, request, abort

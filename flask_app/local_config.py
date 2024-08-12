@@ -12,9 +12,9 @@ class LocalConfig:
     FILEPATH_KANJI_DATA=os.getenv('FILEPATH_KANJI_DATA')
     SECRET_KEY=os.getenv('SECRET_KEY')
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{user}:{password}@{host}/{db_name}?charset=utf8'.format(**{
-        'user': os.getenv('DB_USER'),
-        'password': os.getenv('DB_PASSWORD'),
-        'host': os.getenv('DB_HOST'),
-        'db_name': os.getenv('DB_NAME'),
-    })
-    PERMANENT_SESSION_LIFETIME = timedelta(minutes=60)
+            'user': os.environ['DATABASE_USERNAME'],
+            'password': os.environ['DATABASE_PASSWORD'],
+            'host': os.environ['DATABASE_HOSTNAME'],
+            'db_name': os.environ['DATABASE_NAME'],
+        })
+    PERMANENT_SESSION_LIFETIME = timedelta(minutes=180)

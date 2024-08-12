@@ -1,17 +1,32 @@
-<div class="home_and_login">
-    <div class="home">
-        <a href="{{ url_for('main.index') }}"><img src="../static/img/Home_icon.png" height="50px" width="50px" alt="HOME"></a>
-    </div>
-    <div class="user_name">
-        <p>Welcome!!<span class="current_userName">{{ current_user.username }}</span></p>
-    </div>
-    <ul class="navbar">
-        <li><a href="{{ url_for('main.index') }}">Quiz Game</a></li>
-        <li><a href="{{ url_for('main.review') }}">Review List</a></li>
-        <li><a href="{{ url_for('main.infomation') }}">Infomation</a></li>
-        <li><a href="{{ url_for('main.support') }}">Support</a></li>
-    </ul>
-</div>
-<div class="logout">
-    <a href="{{ url_for('auth.logout') }}">Logout</a>
-</div>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div id="home_and_login">
+            <div class="home">
+                <a href="{{ url_for('main.index') }}"><img src="../static/img/Home_icon.png" height="50px" width="50px" alt="HOME"></a>
+            </div>
+            <div class="user_name">
+                <p>Welcome!!<span class="current_userName">{{ current_user.username }}</span></p>
+            </div>
+            <div class="header_inner">
+                <input type="checkbox" id="drawer-toggle" />
+                <label for="drawer-toggle" class="drawer_btn">
+                    <span class="humberger-content"></span>
+                    <span class="humberger-content"></span>
+                    <span class="humberger-content"></span>
+                </label>
+                <nav class="drawer_nav">
+                    <ul class="navbar">
+                        <li><a href="{{ url_for('main.index') }}">Quiz Game</a></li>
+                        <li><a href="{{ url_for('main.review') }}">Review List</a></li>
+                        <li><a href="{{ url_for('main.infomation') }}">Infomation</a></li>
+                        <li><a href="{{ url_for('main.support') }}">Support</a></li>
+                        <li class="logout"><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </body>
+</html>

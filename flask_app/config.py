@@ -13,10 +13,10 @@ class Config:
         SECRET_KEY = os.environ['SECRET_KEY']
         # sqlalchemy設定
         SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{user}:{password}@{host}/{db_name}?charset=utf8'.format(**{
-            'user': os.environ['DB_USER'],
-            'password': os.environ['DB_PASSWORD'],
-            'host': os.environ['DB_HOST'],
-            'db_name': os.environ['DB_NAME'],
+            'user': os.environ['DATABASE_USERNAME'],
+            'password': os.environ['DATABASE_PASSWORD'],
+            'host': os.environ['DATABASE_HOSTNAME'],
+            'db_name': os.environ['DATABASE_NAME'],
         })
         PERMANENT_SESSION_LIFETIME = timedelta(minutes=60)
         SQLALCHEMY_TRACK_MODIFICATIONS = False

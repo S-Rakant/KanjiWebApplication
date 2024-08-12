@@ -3,7 +3,7 @@ from flask_login import current_user, login_required
 from flask_wtf.csrf import CSRFError
 from .models import Ranking, Review
 from datetime import datetime
-from .init import db
+from . import db
 
 import sqlalchemy
 import ast

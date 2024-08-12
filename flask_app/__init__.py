@@ -35,7 +35,7 @@ def create_app():
     app.register_blueprint(manage_blueprint)
 
 app = Flask(__name__)
-app.config.from_object(Config) #fordeploy
+app.config.from_object(LocalConfig) #fordeploy
 
 # set_logger()
 # logger = getLogger(__name__)

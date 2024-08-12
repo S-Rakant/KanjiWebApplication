@@ -17,26 +17,17 @@ header {
     z-index: 1000;
 }
 
-nav {
+#home_and_login {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 1rem;
 }
 
-.home_and_login {
-    display: flex;
-    align-items: center;
-}
-
-.home_and_login .home_and_login {
-    position: relative;
-    z-index: 10;
-}
-
-.home_and_login div {
-    margin: 0 4rem;
+#home_and_login div {
+    margin: 0 2%;
 }
 
 .user_name {
@@ -47,11 +38,6 @@ nav {
 
 .user_name p {
     margin: 0;
-}
-
-.user_name .current_userName {
-    margin-left: 1rem;
-    margin-right: 15rem;
 }
 
 .logout {
@@ -68,17 +54,6 @@ nav {
     text-decoration: underline;
 }
 
-.navbar {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-.navbar li {
-    margin-right: 20px;
-}
-
 .navbar a {
     color: white;
     text-decoration: none;
@@ -87,4 +62,74 @@ nav {
 
 .navbar a:hover {
     text-decoration: underline;
+}
+
+/* Hamburger Menu Button Styles */
+.drawer_btn {
+    display: flex;
+    flex-direction: column; /* Arrange lines vertically */
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    position: absolute; /* Positioned absolutely */
+    z-index: 2000; /* Ensure it's on top */
+    right: 20px; /* Position it to the right */
+    top: 15px; /* Position it at the top */
+}
+
+/* Hamburger lines */
+.humberger-content {
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 4px 0; /* Space between lines */
+}
+
+/* Navigation menu styles */
+.drawer_nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 250px;
+    background-color: #333;
+    color: white;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    padding-top: 60px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3); /* Optional shadow for better visibility */
+    z-index: 1000; /* Ensure it's below the hamburger button */
+}
+
+.drawer_nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.drawer_nav li {
+    padding: 15px 20px;
+    border-bottom: solid #f0f0f0 2px;
+}
+
+.drawer_nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+}
+
+.drawer_nav a:hover {
+    text-decoration: underline;
+}
+
+/* Toggle drawer visibility */
+#drawer-toggle {
+    display: none;
+}
+
+#drawer-toggle:checked + .drawer_btn + .drawer_nav {
+    transform: translateX(0);
 }

@@ -9,6 +9,6 @@
 /goolab_hiragana_appID.txt
 /flask_app/local_config.py
 /flask_app/log/
-/flask_app/instance/
+/instance/
 /sqlite3-to-mysql.py
 /test.py

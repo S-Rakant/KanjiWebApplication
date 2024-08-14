@@ -24,7 +24,7 @@ func = Blueprint('func', __name__, url_prefix='/func')
 def fetch_data_from_kanjiID_session():
     #sessionが切れていたらloginを促す
     if(not current_user.is_authenticated):
-        return jsonify({'message': 'Session was expired!'}), 400
+        return jsonify({'message': 'Session was expired!'}), 403
     kanjiID = Kanji_ID_Session.query.get(current_user.id)
     kanjiID_arr = set_kanji_id(kanjiID)
     kanji_answer = []

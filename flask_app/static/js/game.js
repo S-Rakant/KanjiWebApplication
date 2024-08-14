@@ -106,8 +106,8 @@ const load_kanji_data = () => {
             if(response.ok){
                 return response.json();
             }
-            if(response.status = 400){
-                console.log('Error 400');
+            if(response.status = 403){
+                console.log('Error 403');
                 window.alert('Your session was expired! Please reload and login again')
                 throw new Error(response.statusText); //警告メッセージを表示させてlogin.htmlに遷移させたい
             }
